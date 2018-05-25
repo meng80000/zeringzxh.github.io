@@ -103,14 +103,14 @@
 
 
   <meta name="description" content="argparse模块是python中用于解析命令行参数和选项的标准模块，方便用户在命令行中输入参数。 argparse使用">
-<meta name="keywords" content="python模块,argparse">
+<meta name="keywords" content="argparse,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python学习-argparse模块">
 <meta property="og:url" content="http://zeringzxh.github.io/2018/05/14/python学习-argparse模块/index.html">
 <meta property="og:site_name" content="zering的博客">
 <meta property="og:description" content="argparse模块是python中用于解析命令行参数和选项的标准模块，方便用户在命令行中输入参数。 argparse使用">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-15T12:09:43.265Z">
+<meta property="og:updated_time" content="2018-05-24T01:53:09.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python学习-argparse模块">
 <meta name="twitter:description" content="argparse模块是python中用于解析命令行参数和选项的标准模块，方便用户在命令行中输入参数。 argparse使用">
@@ -357,7 +357,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-15 20:09:43" itemprop="dateModified" datetime="2018-05-15T20:09:43+08:00">2018-05-15</time>
+                <time title="修改时间：2018-05-24 09:53:09" itemprop="dateModified" datetime="2018-05-24T09:53:09+08:00">2018-05-24</time>
               
             
           </span>
@@ -467,7 +467,7 @@
 <li>存在action=’store_true’，默认值为False</li>
 <li>metavar和action=’store_true’不能共存</li>
 </ul>
-<h3 id="混合参数使用"><a href="#混合参数使用" class="headerlink" title="混合参数使用"></a>混合参数使用</h3><p>计算一个整数数列的最大值或求和：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">'Process some integers.'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'integers'</span>, metavar=<span class="string">'N'</span>, type=int, nargs=<span class="string">'+'</span>,</span><br><span class="line">                   help=<span class="string">'an integer for the accumulator'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>, dest=<span class="string">'accumulate'</span>, action=<span class="string">'store_const'</span>,</span><br><span class="line">                   const=sum, default=max,</span><br><span class="line">                   help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line">                   </span><br><span class="line">args = parser.parse_args()</span><br><span class="line">print(args.accumulate(args.integers))</span><br></pre></td></tr></table></figure></p>
+<h3 id="混合参数使用"><a href="#混合参数使用" class="headerlink" title="混合参数使用"></a>混合参数使用</h3><p>计算一个整数数列的最大值或求和：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">'Process some integers.'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'integers'</span>, metavar=<span class="string">'N'</span>, type=int, nargs=<span class="string">'+'</span>,</span><br><span class="line">                   help=<span class="string">'an integer for the accumulator'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>, dest=<span class="string">'accumulate'</span>, action=<span class="string">'store_const'</span>,</span><br><span class="line">                   const=sum, default=max,</span><br><span class="line">                   help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line">print(args.accumulate(args.integers))</span><br></pre></td></tr></table></figure></p>
 <p>运行结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ python test.py 1 2 3 4</span><br><span class="line">4</span><br><span class="line">$ python test.py 1 2 3 4 --sum</span><br><span class="line">10</span><br></pre></td></tr></table></figure></p>
 <p>上述示例使用accumulate来重命名sum参数，与下面代码实现功能一样：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">'Process some integers.'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'integers'</span>, metavar=<span class="string">'N'</span>, type=int, nargs=<span class="string">'+'</span>,</span><br><span class="line">                   help=<span class="string">'an integer for the accumulator'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>, action=<span class="string">'store_const'</span>,</span><br><span class="line">                   const=sum, default=max,</span><br><span class="line">                   help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line">print(args.sum(args.integers))</span><br></pre></td></tr></table></figure></p>
 
@@ -501,9 +501,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python模块/" rel="tag"><i class="fa fa-tag"></i> python模块</a>
-          
             <a href="/tags/argparse/" rel="tag"><i class="fa fa-tag"></i> argparse</a>
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
         </div>
       
@@ -512,6 +512,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/24/url去重去似/" rel="prev" title="URL去重去似">
+                URL去重去似 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -587,7 +603,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -602,7 +618,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -619,7 +637,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -717,7 +741,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1.4k字</span>
+  <span class="post-count">博客全站共2.4k字</span>
 </div>
 
         
