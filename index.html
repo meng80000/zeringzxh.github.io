@@ -361,7 +361,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-25 11:23:14" itemprop="dateModified" datetime="2018-05-25T11:23:14+08:00">2018-05-25</time>
+                <time title="修改时间：2018-05-25 11:24:58" itemprop="dateModified" datetime="2018-05-25T11:24:58+08:00">2018-05-25</time>
               
             
           </span>
@@ -416,12 +416,7 @@
           <h2 id="URL去重"><a href="#URL去重" class="headerlink" title="URL去重"></a>URL去重</h2><p>URL去重主要有两种方式：</p>
 <ul>
 <li>布隆过滤器去重</li>
-<li>Hash表去重</li>
-</ul>
-<h3 id="布隆过滤器去重"><a href="#布隆过滤器去重" class="headerlink" title="布隆过滤器去重"></a>布隆过滤器去重</h3><ol>
-<li>需要一个数组和k个映射函数，初始将数组array所有位置都置0。</li>
-<li>将元素集S={s1,s2……sn}中每个元素sj，通过k个映射函数{f1,f2……fk}映射为K个值{g1，g2……gk},将array中对应的array[g1],array[g2]……array[gk]置为1.</li>
-<li>若元素item通过映射函数得到的k个值在array中对应的值全为1，则item在S中，否则不在。
+<li>Hash表去重
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/24/url去重去似/#更多" rel="contents">

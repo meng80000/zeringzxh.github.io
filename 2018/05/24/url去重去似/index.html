@@ -102,18 +102,18 @@
 
 
 
-  <meta name="description" content="URL去重URL去重主要有两种方式：  布隆过滤器去重 Hash表去重  布隆过滤器去重 需要一个数组和k个映射函数，初始将数组array所有位置都置0。 将元素集S={s1,s2……sn}中每个元素sj，通过k个映射函数{f1,f2……fk}映射为K个值{g1，g2……gk},将array中对应的array[g1],array[g2]……array[gk]置为1. 若元素item通过映射函数得到">
+  <meta name="description" content="URL去重URL去重主要有两种方式：  布隆过滤器去重 Hash表去重">
 <meta name="keywords" content="python,url">
 <meta property="og:type" content="article">
 <meta property="og:title" content="URL去重去似">
 <meta property="og:url" content="http://zeringzxh.github.io/2018/05/24/url去重去似/index.html">
 <meta property="og:site_name" content="zering的博客">
-<meta property="og:description" content="URL去重URL去重主要有两种方式：  布隆过滤器去重 Hash表去重  布隆过滤器去重 需要一个数组和k个映射函数，初始将数组array所有位置都置0。 将元素集S={s1,s2……sn}中每个元素sj，通过k个映射函数{f1,f2……fk}映射为K个值{g1，g2……gk},将array中对应的array[g1],array[g2]……array[gk]置为1. 若元素item通过映射函数得到">
+<meta property="og:description" content="URL去重URL去重主要有两种方式：  布隆过滤器去重 Hash表去重">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-25T03:23:14.714Z">
+<meta property="og:updated_time" content="2018-05-25T03:24:58.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="URL去重去似">
-<meta name="twitter:description" content="URL去重URL去重主要有两种方式：  布隆过滤器去重 Hash表去重  布隆过滤器去重 需要一个数组和k个映射函数，初始将数组array所有位置都置0。 将元素集S={s1,s2……sn}中每个元素sj，通过k个映射函数{f1,f2……fk}映射为K个值{g1，g2……gk},将array中对应的array[g1],array[g2]……array[gk]置为1. 若元素item通过映射函数得到">
+<meta name="twitter:description" content="URL去重URL去重主要有两种方式：  布隆过滤器去重 Hash表去重">
 
 
 
@@ -357,7 +357,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-25 11:23:14" itemprop="dateModified" datetime="2018-05-25T11:23:14+08:00">2018-05-25</time>
+                <time title="修改时间：2018-05-25 11:24:58" itemprop="dateModified" datetime="2018-05-25T11:24:58+08:00">2018-05-25</time>
               
             
           </span>
@@ -411,14 +411,15 @@
         <h2 id="URL去重"><a href="#URL去重" class="headerlink" title="URL去重"></a>URL去重</h2><p>URL去重主要有两种方式：</p>
 <ul>
 <li>布隆过滤器去重</li>
-<li>Hash表去重</li>
+<li>Hash表去重<a id="more"></a>
+<h3 id="布隆过滤器去重"><a href="#布隆过滤器去重" class="headerlink" title="布隆过滤器去重"></a>布隆过滤器去重</h3></li>
 </ul>
-<h3 id="布隆过滤器去重"><a href="#布隆过滤器去重" class="headerlink" title="布隆过滤器去重"></a>布隆过滤器去重</h3><ol>
+<ol>
 <li>需要一个数组和k个映射函数，初始将数组array所有位置都置0。</li>
 <li>将元素集S={s1,s2……sn}中每个元素sj，通过k个映射函数{f1,f2……fk}映射为K个值{g1，g2……gk},将array中对应的array[g1],array[g2]……array[gk]置为1.</li>
-<li>若元素item通过映射函数得到的k个值在array中对应的值全为1，则item在S中，否则不在。<a id="more"></a>
-python有两个第三方插件实现了此功能：</li>
+<li>若元素item通过映射函数得到的k个值在array中对应的值全为1，则item在S中，否则不在。</li>
 </ol>
+<p>python有两个第三方插件实现了此功能：</p>
 <ul>
 <li>Python-bloomfilter<br>项目地址:<a href="https://github.com/jaybaird/Python-bloomfilter" target="_blank" rel="noopener">https://github.com/jaybaird/Python-bloomfilter</a></li>
 <li>Pybloomfiltermmap<br>项目地址:<a href="https://github.com/axiak/Pybloomfiltermmap" target="_blank" rel="noopener">https://github.com/axiak/Pybloomfiltermmap</a><br>官方文档:<a href="https://axiak.github.io/pybloomfiltermmap/" target="_blank" rel="noopener">https://axiak.github.io/pybloomfiltermmap/</a></li>
