@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="DalvikDVM运行Dalvik字节码，可执行文件格式dex(dalvik executable)，有点类似于机器码。DVM基于寄存器，JVM基于栈。 smali语法变量和参数寄存器命名方式   v命名法 p命名法 寄存器含义     v0 v0 第一个局部变量寄存器   … … 中间的局部变量寄存器   vM-N p0 第一个参数寄存器（通常为调用对象）   … … 中间的参数寄存器   vM">
+<meta name="keywords" content="逆向,smali,android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android逆向-smali语法">
+<meta property="og:url" content="http://zeringzxh.github.io/2018/06/01/Android逆向-smali语法/index.html">
+<meta property="og:site_name" content="zering的博客">
+<meta property="og:description" content="DalvikDVM运行Dalvik字节码，可执行文件格式dex(dalvik executable)，有点类似于机器码。DVM基于寄存器，JVM基于栈。 smali语法变量和参数寄存器命名方式   v命名法 p命名法 寄存器含义     v0 v0 第一个局部变量寄存器   … … 中间的局部变量寄存器   vM-N p0 第一个参数寄存器（通常为调用对象）   … … 中间的参数寄存器   vM">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-01T07:15:33.040Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android逆向-smali语法">
+<meta name="twitter:description" content="DalvikDVM运行Dalvik字节码，可执行文件格式dex(dalvik executable)，有点类似于机器码。DVM基于寄存器，JVM基于栈。 smali语法变量和参数寄存器命名方式   v命名法 p命名法 寄存器含义     v0 v0 第一个局部变量寄存器   … … 中间的局部变量寄存器   vM-N p0 第一个参数寄存器（通常为调用对象）   … … 中间的参数寄存器   vM">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="zering的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://zeringzxh.github.io/2018/06/01/Android逆向-smali语法/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Android逆向-smali语法 | zering的博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/zeringzxh" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zering的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录点滴</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zeringzxh.github.io/2018/06/01/Android逆向-smali语法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zering">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zering的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android逆向-smali语法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-01 10:56:06 / 修改时间：15:15:33" itemprop="dateCreated datePublished" datetime="2018-06-01T10:56:06+08:00">2018-06-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/逆向/" itemprop="url" rel="index"><span itemprop="name">逆向</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/01/Android逆向-smali语法/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/01/Android逆向-smali语法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Dalvik"><a href="#Dalvik" class="headerlink" title="Dalvik"></a>Dalvik</h2><p>DVM运行Dalvik字节码，可执行文件格式dex(dalvik executable)，有点类似于机器码。DVM基于寄存器，JVM基于栈。</p>
+<h2 id="smali语法"><a href="#smali语法" class="headerlink" title="smali语法"></a>smali语法</h2><h3 id="变量和参数寄存器命名方式"><a href="#变量和参数寄存器命名方式" class="headerlink" title="变量和参数寄存器命名方式"></a>变量和参数寄存器命名方式</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">v命名法</th>
+<th style="text-align:center">p命名法</th>
+<th style="text-align:center">寄存器含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">v0</td>
+<td style="text-align:center">v0</td>
+<td style="text-align:center">第一个局部变量寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">中间的局部变量寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">vM-N</td>
+<td style="text-align:center">p0</td>
+<td style="text-align:center">第一个参数寄存器（通常为调用对象）</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">中间的参数寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">vM-1</td>
+<td style="text-align:center">pN-1</td>
+<td style="text-align:center">第N个参数寄存器</td>
+</tr>
+</tbody>
+</table>
+<p>通常使用p命名法进行记录。</p>
+<h3 id="类型描述符"><a href="#类型描述符" class="headerlink" title="类型描述符"></a>类型描述符</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">语法</th>
+<th style="text-align:center">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">—-</td>
+<td style="text-align:center">——-</td>
+</tr>
+<tr>
+<td style="text-align:center">V</td>
+<td style="text-align:center">void</td>
+</tr>
+<tr>
+<td style="text-align:center">Z</td>
+<td style="text-align:center">boolean</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td style="text-align:center">byte</td>
+</tr>
+<tr>
+<td style="text-align:center">S</td>
+<td style="text-align:center">short</td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">char</td>
+</tr>
+<tr>
+<td style="text-align:center">I</td>
+<td style="text-align:center">int</td>
+</tr>
+<tr>
+<td style="text-align:center">J</td>
+<td style="text-align:center">long</td>
+</tr>
+<tr>
+<td style="text-align:center">F</td>
+<td style="text-align:center">float</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">double</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td style="text-align:center">java类</td>
+</tr>
+<tr>
+<td style="text-align:center">[</td>
+<td style="text-align:center">数组</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注：</strong></p>
+<ul>
+<li>变量存放在寄存器中，寄存器为32位，支持任何类型，其中long，double是64位，使用两个相邻的寄存器。</li>
+<li>[x表示一维数组，x代表基本类型，如[I代表int[],[[x代表二维数组。</li>
+<li>Java语言存在大量对象，java.lang.String表示为<em>Ljava/lang/String;</em>；分号一定要加上。</li>
+</ul>
+<h3 id="方法和字段"><a href="#方法和字段" class="headerlink" title="方法和字段"></a>方法和字段</h3><h4 id="方法定义"><a href="#方法定义" class="headerlink" title="方法定义"></a>方法定义</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#direct/virtual methods</span><br><span class="line">.method &lt;访问权限&gt; [修饰关键字] &lt;方法原型&gt;</span><br><span class="line">    &lt;.registers&gt;</span><br><span class="line">    [.param]</span><br><span class="line">    [.prologue]</span><br><span class="line">    [.line]</span><br><span class="line">    &lt;.local&gt;</span><br><span class="line">    &lt;代码体&gt;</span><br><span class="line">.end method</span><br></pre></td></tr></table></figure>
+<ul>
+<li>#direct/virtual methods是注释，是baksmali添加的，访问权限和修饰关键字跟字段是一样的。</li>
+<li>方法原型描述了方法的名称、参数与返回值。<ul>
+<li>.registers 指令指定了方法中寄存器的总数,这个数量是参数和本地变量总和。</li>
+<li>.param表明了方法的参数，每个.param指令表示一个参数，方法使用了几个参数就有几个.parameter指令。</li>
+<li>.prologue指定了代码的开始处，混淆过的代码可能去掉了该指令。</li>
+<li>.line指明了该处代码在源代码中的行号，同样，混淆后的代码可能去掉了行号。</li>
+<li>.local 使用这个指定表明方法中非参寄存器</li>
+</ul>
+</li>
+</ul>
+<h4 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h4><p>方法调用格式：Lpackage/name/ObjectName;-&gt;MethodName(III)Z<br>等价于bool package.name.ObjectName.MethodName（int,int,int）<br>例子：<br>method(I[[IILjava/lang/String;[Ljava/lang/Object;)Ljava/lang/Stirng<br>等价于<br>String method(int,int[][],int,String,Object[])</p>
+<h4 id="字段调用"><a href="#字段调用" class="headerlink" title="字段调用"></a>字段调用</h4><p>格式：Lpackage/name/ObjectName;-&gt;FieldName:Ljava/lang/String;<br>等价于：package.name.ObjectName.FieldName</p>
+<h3 id="头信息-类的主体信息"><a href="#头信息-类的主体信息" class="headerlink" title="头信息-类的主体信息"></a>头信息-类的主体信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//===================================================================</span><br><span class="line">public class MainActivity extends AppCompatActivity implements View.OnClickListener &#123;</span><br><span class="line">    // ......</span><br><span class="line">&#125;</span><br><span class="line">//=========smali文件头====================================================</span><br><span class="line">.class public Ltestdemo/hpp/cn/test/MainActivity;</span><br><span class="line">.super Landroid/support/v7/app/AppCompatActivity;</span><br><span class="line">.source &quot;MainActivity.java&quot;</span><br><span class="line">.implements Landroid/view/View$OnClickListener;</span><br><span class="line">//===================================================================</span><br></pre></td></tr></table></figure>
+<p>.class &lt;访问权限&gt; [关键修饰字] &lt;类名&gt;;<br>.super &lt;父类名&gt;;<br>.source &lt;源文件名&gt;<br>.implements &lt;接口名&gt;</p>
+<h3 id="判断语句"><a href="#判断语句" class="headerlink" title="判断语句"></a>判断语句</h3><p>共有12种判断语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if-eq vA, VB, cond_** 如果vA等于vB则跳转到cond_**。相当于if (vA==vB)</span><br><span class="line">if-ne vA, VB, cond_** 如果vA不等于vB则跳转到cond_**。相当于if (vA!=vB)</span><br><span class="line">if-lt vA, VB, cond_** 如果vA小于vB则跳转到cond_**。相当于if (vA&lt;vB)</span><br><span class="line">if-le vA, VB, cond_** 如果vA小于等于vB则跳转到cond_**。相当于if (vA&lt;=vB)</span><br><span class="line">if-gt vA, VB, cond_** 如果vA大于vB则跳转到cond_**。相当于if (vA&gt;vB)</span><br><span class="line">if-ge vA, VB, cond_** 如果vA大于等于vB则跳转到cond_**。相当于if (vA&gt;=vB)</span><br><span class="line"></span><br><span class="line">if-eqz vA, :cond_** 如果vA等于0则跳转到:cond_** 相当于if (VA==0)</span><br><span class="line">if-nez vA, :cond_** 如果vA不等于0则跳转到:cond_**相当于if (VA!=0)</span><br><span class="line">if-ltz vA, :cond_** 如果vA小于0则跳转到:cond_**相当于if (VA&lt;0)</span><br><span class="line">if-lez vA, :cond_** 如果vA小于等于0则跳转到:cond_**相当于if (VA&lt;=0)</span><br><span class="line">if-gtz vA, :cond_** 如果vA大于0则跳转到:cond_**相当于if (VA&gt;0)</span><br><span class="line">if-gez vA, :cond_** 如果vA大于等于0则跳转到:cond_**相当于if (VA&gt;=0)</span><br></pre></td></tr></table></figure></p>
+<h3 id="其它基本指令"><a href="#其它基本指令" class="headerlink" title="其它基本指令"></a>其它基本指令</h3><p>smali字节码类似于汇编<br>move v0, v3 把v3寄存器的值移动到寄存器v0上<br>const-string v0, “MainActivity” 把字符串”MainActivity”赋值给v0寄存器<br>invoke-super　　调用父函数<br>return-void　　函数返回void<br>new-instance　　创建实例<br>iput-object　　对象赋值<br>iget-object　　调用对象<br>invoke-static　　调用静态函数<br>invoke-direct　　调用函数</p>
+<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">//===================================================================</span><br><span class="line">@Override</span><br><span class="line">public void onClick(View view) &#123;</span><br><span class="line">    String str = &quot;Hello World!&quot;;</span><br><span class="line">    print(str);</span><br><span class="line">&#125;</span><br><span class="line">//===================================================================</span><br><span class="line"># virtual methods</span><br><span class="line"># 参数类型为Landroid/view/View，返回类型为V</span><br><span class="line">.method public onClick(Landroid/view/View;)V</span><br><span class="line">    # 表示有三个寄存器</span><br><span class="line">    .registers 3</span><br><span class="line">    # 参数View类型的view变量对应的是寄存器p1</span><br><span class="line">    .param p1, &quot;view&quot;    # Landroid/view/View;</span><br><span class="line"></span><br><span class="line">    .prologue</span><br><span class="line">    .line 24</span><br><span class="line">    #将&quot;Hello World!&quot;字符串放到寄存器v0中</span><br><span class="line">    const-string v0, &quot;Hello World!&quot;</span><br><span class="line"></span><br><span class="line">    .line 25</span><br><span class="line">    # 定义一个Ljava/lang/String类型的str变量对应本地寄存器v0</span><br><span class="line">    .local v0, &quot;str&quot;:Ljava/lang/String;</span><br><span class="line">    # 调用该类的print方法，该方法的参数类型为Ljava/lang/String，返回值为V</span><br><span class="line">    # 调用print方法传入的参数为&#123;p0, v0&#125;，及print(p0, v0)，p0为this，v0为&quot;Hello World!&quot;字符串</span><br><span class="line">    invoke-direct &#123;p0, v0&#125;, Ltestdemo/hpp/cn/annotationtest/MainActivity;-&gt;print(Ljava/lang/String;)V</span><br><span class="line"></span><br><span class="line">    .line 26</span><br><span class="line">    return-void</span><br><span class="line">.end method</span><br><span class="line">//===================================================================</span><br></pre></td></tr></table></figure></p>
+<p>参考文章：<br><a href="https://blog.csdn.net/hp910315/article/details/51823236" target="_blank" rel="noopener">静态分析Android程序——smali文件解析</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+          
+            <div>
+  
+    <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+  
+</div>
+
+          
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/逆向/" rel="tag"><i class="fa fa-tag"></i> 逆向</a>
+          
+            <a href="/tags/smali/" rel="tag"><i class="fa fa-tag"></i> smali</a>
+          
+            <a href="/tags/android/" rel="tag"><i class="fa fa-tag"></i> android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/24/url去重去似/" rel="next" title="URL去重去似">
+                <i class="fa fa-chevron-left"></i> URL去重去似
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zering</p>
+              <p class="site-description motion-element" itemprop="description">学而时习之</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dalvik"><span class="nav-number">1.</span> <span class="nav-text">Dalvik</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smali语法"><span class="nav-number">2.</span> <span class="nav-text">smali语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量和参数寄存器命名方式"><span class="nav-number">2.1.</span> <span class="nav-text">变量和参数寄存器命名方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型描述符"><span class="nav-number">2.2.</span> <span class="nav-text">类型描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法和字段"><span class="nav-number">2.3.</span> <span class="nav-text">方法和字段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法定义"><span class="nav-number">2.3.1.</span> <span class="nav-text">方法定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法调用"><span class="nav-number">2.3.2.</span> <span class="nav-text">方法调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字段调用"><span class="nav-number">2.3.3.</span> <span class="nav-text">字段调用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头信息-类的主体信息"><span class="nav-number">2.4.</span> <span class="nav-text">头信息-类的主体信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断语句"><span class="nav-number">2.5.</span> <span class="nav-text">判断语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它基本指令"><span class="nav-number">2.6.</span> <span class="nav-text">其它基本指令</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zering</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+  </div>
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.2.0</div>
+
+-->
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共3.6k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'lQLsGBhiarkYBwvOmqFw80NJ-gzGzoHsz',
+        appKey: 'qBw97RhefahyXiugjB2ogQtl',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

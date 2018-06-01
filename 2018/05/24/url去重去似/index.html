@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="zering的博客">
 <meta property="og:description" content="URL去重URL去重主要有两种方式：  布隆过滤器去重 Hash表去重">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-25T03:24:58.078Z">
+<meta property="og:updated_time" content="2018-06-01T07:12:48.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="URL去重去似">
 <meta name="twitter:description" content="URL去重URL去重主要有两种方式：  布隆过滤器去重 Hash表去重">
@@ -357,7 +357,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-25 11:24:58" itemprop="dateModified" datetime="2018-05-25T11:24:58+08:00">2018-05-25</time>
+                <time title="修改时间：2018-06-01 15:12:48" itemprop="dateModified" datetime="2018-06-01T15:12:48+08:00">2018-06-01</time>
               
             
           </span>
@@ -421,10 +421,9 @@
         <h2 id="URL去重"><a href="#URL去重" class="headerlink" title="URL去重"></a>URL去重</h2><p>URL去重主要有两种方式：</p>
 <ul>
 <li>布隆过滤器去重</li>
-<li>Hash表去重<a id="more"></a>
-<h3 id="布隆过滤器去重"><a href="#布隆过滤器去重" class="headerlink" title="布隆过滤器去重"></a>布隆过滤器去重</h3></li>
-</ul>
-<ol>
+<li><p>Hash表去重</p>
+<a id="more"></a>
+<h3 id="布隆过滤器去重"><a href="#布隆过滤器去重" class="headerlink" title="布隆过滤器去重"></a>布隆过滤器去重</h3><ol>
 <li>需要一个数组和k个映射函数，初始将数组array所有位置都置0。</li>
 <li>将元素集S={s1,s2……sn}中每个元素sj，通过k个映射函数{f1,f2……fk}映射为K个值{g1，g2……gk},将array中对应的array[g1],array[g2]……array[gk]置为1.</li>
 <li>若元素item通过映射函数得到的k个值在array中对应的值全为1，则item在S中，否则不在。</li>
@@ -439,8 +438,10 @@
 <p>方法add是添加元素，若元素已存在，则返回True，若不存在则返回False，并添加到过滤器中。</p>
 <p>布隆过滤器存在一定的误判率。</p>
 <h3 id="Hash表去重"><a href="#Hash表去重" class="headerlink" title="Hash表去重"></a>Hash表去重</h3><p>遍历URL列表，判断每个URL是否在去重后的列表里，如果不在，则加入列表。根据哈希表存放的位置，可以分为两种方式：一种是基于内存的Hash表去重；一种是基于硬盘的Hash表去重。</p>
-<h4 id="方法一：利用内存Hash表去重"><a href="#方法一：利用内存Hash表去重" class="headerlink" title="方法一：利用内存Hash表去重"></a>方法一：利用内存Hash表去重</h4><p>使用如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> url_list:</span><br><span class="line">  <span class="keyword">if</span> url <span class="keyword">not</span> <span class="keyword">in</span> result:</span><br><span class="line">    result.append(url)</span><br><span class="line">......</span><br></pre></td></tr></table></figure></p>
-<p>由于URL长度不固定，单个URL长度越长，使用URL存储内存和性能损耗过快，此时需对URL进行Hash运算压缩，如：16位md5运算。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python 2.x</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">print</span> hashlib.md5(<span class="string">"hello"</span>).hexdigest()[<span class="number">8</span>:<span class="number">-8</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 3.x</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">print(hashlib.md5(<span class="string">"hello"</span>.encode(<span class="string">'utf-8'</span>)).hexdigest())[<span class="number">8</span>:<span class="number">-8</span>]</span><br></pre></td></tr></table></figure></p>
+<h4 id="方法一：利用内存Hash表去重"><a href="#方法一：利用内存Hash表去重" class="headerlink" title="方法一：利用内存Hash表去重"></a>方法一：利用内存Hash表去重</h4><p>使用如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> url_list:</span><br><span class="line">  <span class="keyword">if</span> url <span class="keyword">not</span> <span class="keyword">in</span> result:</span><br><span class="line">    result.append(url)</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>由于URL长度不固定，单个URL长度越长，使用URL存储内存和性能损耗过快，此时需对URL进行Hash运算压缩，如：16位md5运算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python 2.x</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">print</span> hashlib.md5(<span class="string">"hello"</span>).hexdigest()[<span class="number">8</span>:<span class="number">-8</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 3.x</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">print(hashlib.md5(<span class="string">"hello"</span>.encode(<span class="string">'utf-8'</span>)).hexdigest())[<span class="number">8</span>:<span class="number">-8</span>]</span><br></pre></td></tr></table></figure>
 <h4 id="方法二：利用BerkeleyDB去重"><a href="#方法二：利用BerkeleyDB去重" class="headerlink" title="方法二：利用BerkeleyDB去重"></a>方法二：利用BerkeleyDB去重</h4><p>BerkeleyDB是一个key-value database，简单的说，就是一个在disk上的hash表。存储的是“key-value”键值对。<br>下载安装Berkeley DB安装。Python需要安装bsddb3模块来提供BerkeleyDB数据库的操作接口。<br>Berkeley DB次你在四种数据访问模式：</p>
 <ul>
 <li>btree：树结构，存储任意复杂key和value</li>
@@ -450,6 +451,8 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bsddb</span><br><span class="line">mydb = bsddb.db.DB()</span><br><span class="line">mydb.open(<span class="string">'mydb.db'</span>,dbtype = bsddb.db.DB_HASH, flags = bsddb.db.DB_CREATE)</span><br><span class="line">mydb.put(<span class="string">"key"</span>,<span class="string">"value"</span>)</span><br><span class="line">mydb.close()</span><br></pre></td></tr></table></figure>
 <p>设置数据访问方法：<br>btree是 bsddb.db.DB_BTREE， hash是bsddb.db.DB_HASH<br>queu 是 bsddb.db.DB_QUEUE,  recno 是bsddb.db.DB_RECNO<br>设置flags参数为DB_CREATE表明如果数据文件不存在则新建一个空的数据文件。<br>使用DB的put方法存储一个Key/Value对</p>
+</li>
+</ul>
 <h2 id="URL去似去含"><a href="#URL去似去含" class="headerlink" title="URL去似去含"></a>URL去似去含</h2><p>相似URL特征：</p>
 <ul>
 <li>协议相同（protocol）</li>
@@ -516,6 +519,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/01/Android逆向-smali语法/" rel="prev" title="Android逆向-smali语法">
+                Android逆向-smali语法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -592,7 +599,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -609,7 +616,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -628,7 +637,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -726,7 +741,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共2.4k字</span>
+  <span class="post-count">博客全站共3.6k字</span>
 </div>
 
         
