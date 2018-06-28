@@ -102,25 +102,26 @@
 
 
 
-  <meta name="description" content="Cuckoo Sandbox是一个开源的恶意文件自动化分析系统，通过Cuckoo Sandbox可以方便地帮助安全研究人员验证恶意程序的特征信息。 安装环境本人在vmware中建立两个虚拟机，一个host，一个guest。VMware 12 Proubuntu-16.04.1-desktop-amd64window7-64bit">
-<meta name="keywords" content="Cickoo Sandbox,工具安装">
+  <meta name="description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图： 0x02 漏洞利用直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图： 查看权限，直接为system权限。  其他查看信息的命令不一一列举。 进入cmd，发现kali控制台显示乱码，使用chc">
+<meta name="keywords" content="渗透测试,内网">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cuckoo-Sandbox学习-安装篇">
-<meta property="og:url" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/index.html">
+<meta property="og:title" content="渗透测试-公司内网">
+<meta property="og:url" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/index.html">
 <meta property="og:site_name" content="zering的博客">
-<meta property="og:description" content="Cuckoo Sandbox是一个开源的恶意文件自动化分析系统，通过Cuckoo Sandbox可以方便地帮助安全研究人员验证恶意程序的特征信息。 安装环境本人在vmware中建立两个虚拟机，一个host，一个guest。VMware 12 Proubuntu-16.04.1-desktop-amd64window7-64bit">
+<meta property="og:description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图： 0x02 漏洞利用直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图： 查看权限，直接为system权限。  其他查看信息的命令不一一列举。 进入cmd，发现kali控制台显示乱码，使用chc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/网卡-ubuntu.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/install.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/run.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/ip-windows7.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/win7配置.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/ping.PNG">
-<meta property="og:updated_time" content="2018-06-09T10:57:33.375Z">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/漏洞.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/meterpreter.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/getuid.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/乱码.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/域控.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/net_group.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/Domain_Admins.PNG">
+<meta property="og:updated_time" content="2018-06-28T10:20:56.688Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cuckoo-Sandbox学习-安装篇">
-<meta name="twitter:description" content="Cuckoo Sandbox是一个开源的恶意文件自动化分析系统，通过Cuckoo Sandbox可以方便地帮助安全研究人员验证恶意程序的特征信息。 安装环境本人在vmware中建立两个虚拟机，一个host，一个guest。VMware 12 Proubuntu-16.04.1-desktop-amd64window7-64bit">
-<meta name="twitter:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/网卡-ubuntu.PNG">
+<meta name="twitter:title" content="渗透测试-公司内网">
+<meta name="twitter:description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图： 0x02 漏洞利用直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图： 查看权限，直接为system权限。  其他查看信息的命令不一一列举。 进入cmd，发现kali控制台显示乱码，使用chc">
+<meta name="twitter:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/漏洞.PNG">
 
 
 
@@ -129,7 +130,7 @@
 
 
 
-  <link rel="canonical" href="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/"/>
+  <link rel="canonical" href="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/"/>
 
 
 
@@ -139,7 +140,7 @@
   };
 </script>
 
-  <title>Cuckoo-Sandbox学习-安装篇 | zering的博客</title>
+  <title>渗透测试-公司内网 | zering的博客</title>
   
 
 
@@ -305,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/">
+    <link itemprop="mainEntityOfPage" href="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zering">
@@ -322,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Cuckoo-Sandbox学习-安装篇
+          <h1 class="post-title" itemprop="name headline">渗透测试-公司内网
               
             
           </h1>
@@ -347,24 +348,12 @@
                 
               
 
-              <time title="创建时间：2018-06-06 14:11:45" itemprop="dateCreated datePublished" datetime="2018-06-06T14:11:45+08:00">2018-06-06</time>
+              <time title="创建时间：2018-06-28 08:43:04 / 修改时间：18:20:56" itemprop="dateCreated datePublished" datetime="2018-06-28T08:43:04+08:00">2018-06-28</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-06-09 18:57:33" itemprop="dateModified" datetime="2018-06-09T18:57:33+08:00">2018-06-09</time>
               
             
           </span>
@@ -381,7 +370,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Cuckoo-Sandbox/" itemprop="url" rel="index"><span itemprop="name">Cuckoo Sandbox</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/渗透测试/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a></span>
 
                 
                 
@@ -396,8 +385,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/06/Cuckoo-Sandbox学习-安装篇/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/06/Cuckoo-Sandbox学习-安装篇/" itemprop="commentCount"></span>
+                <a href="/2018/06/28/域渗透-公司内网/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/28/域渗透-公司内网/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -425,50 +414,33 @@
       
 
       
-        <p>Cuckoo Sandbox是一个开源的恶意文件自动化分析系统，通过Cuckoo Sandbox可以方便地帮助安全研究人员验证恶意程序的特征信息。</p>
-<h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><p>本人在vmware中建立两个虚拟机，一个host，一个guest。<br>VMware 12 Pro<br>ubuntu-16.04.1-desktop-amd64<br>window7-64bit<br><a id="more"></a></p>
-<h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><p>使用vmware安装ubuntu-16.04.1-desktop-amd64，添加2个网卡，一个NAT模式，一个内网网卡。<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/网卡-ubuntu.PNG" alt=""></p>
-<p>依赖库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python python-pip python-dev libffi-dev libssl-dev</span><br><span class="line">$ sudo apt-get install python-virtualenv python-setuptools</span><br><span class="line">$ sudo apt-get install libjpeg-dev zlib1g-dev swig</span><br></pre></td></tr></table></figure></p>
-<p>为了使用基于Django的Web界面,使用PostgreSQL作为数据库，需要安装MongoDB和PostgreSQL。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install mongodb</span><br><span class="line">$ sudo apt-get install postgresql libpq-dev</span><br></pre></td></tr></table></figure></p>
-<p>建议首先升级pip和setuptools库，因为它们经常过时，导致试图安装Cuckoo时出现问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pip install -U pip setuptools</span><br></pre></td></tr></table></figure></p>
+        <h2 id="0x01-问题发现"><a href="#0x01-问题发现" class="headerlink" title="0x01 问题发现"></a>0x01 问题发现</h2><p>前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：<br><img src="/2018/06/28/域渗透-公司内网/漏洞.PNG" alt=""></p>
+<h2 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02 漏洞利用"></a>0x02 漏洞利用</h2><p>直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图：<br><img src="/2018/06/28/域渗透-公司内网/meterpreter.PNG" alt=""></p>
+<p>查看权限，直接为system权限。</p>
+<p><img src="/2018/06/28/域渗透-公司内网/getuid.PNG" alt=""></p>
+<p>其他查看信息的命令不一一列举。</p>
+<p>进入cmd，发现kali控制台显示乱码，使用chcp 65001命令解决：</p>
+<p><img src="/2018/06/28/域渗透-公司内网/乱码.PNG" alt=""></p>
+<p>查看systeminfo信息，发现是域控。。。。。</p>
+<p><img src="/2018/06/28/域渗透-公司内网/域控.PNG" alt=""></p>
+<h2 id="0x02-域信息收集"><a href="#0x02-域信息收集" class="headerlink" title="0x02 域信息收集"></a>0x02 域信息收集</h2><p>windows server机器，使用dsget和dsquery进行域信息收集。<br>使用命令查看全域信息，内容太多，就不截图了<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dsquery * -limit <span class="number">0</span> -attr *</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p>若使用virtual box则创建一个cuckoo用户，将其添加到vboxusers组里<font color="red">（VirtualBox安装后创建）</font>。确保运行Cuckoo的用户与用于创建和运行虚拟机的用户相同（至少在VirtualBox的情况下），否则Cuckoo将无法识别和启动这些虚拟机。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo adduser cuckoo</span><br><span class="line">$ sudo usermod -a -G vboxusers cuckoo</span><br></pre></td></tr></table></figure></p>
-<p>安装VirtualBox<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install virtualbox</span><br></pre></td></tr></table></figure></p>
+<p>CN, OU, DC 都是 LDAP 连接服务器的端字符串中的区别名称（DN, distinguished   name）</p>
+<pre><code>DC (Domain Component)
+CN (Common Name)
+OU (Organizational Unit)
+</code></pre><p>例如：CN=test,OU=developer,DC=domainname,DC=com</p>
+<p>在上面的代码中 cn=test 可能代表一个用户名，ou=developer 代表一个 active directory 中的组织单位。这句话的含义可能就是说明 test 这个对象处在domainname.com 域的 developer 组织单元中</p>
 <hr>
-<h2 id="安装Cuckoo"><a href="#安装Cuckoo" class="headerlink" title="安装Cuckoo"></a>安装Cuckoo</h2><p>使用一条命令安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pip install -U cuckoo</span><br></pre></td></tr></table></figure></p>
-<p>部分依赖需要翻墙，安装成功如下：<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/install.PNG" alt=""></p>
-<p>如果在本地使用virtual box则切换cuckoo用户并运行，<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/run.PNG" alt=""></p>
-<p>从中可以看出配置文件路径为<em>/home/cuckoo/.cuckoo/conf</em>，工作目录路径可以修改，.cuckoo为隐藏目录，使用<code>ctrl+h</code>查看隐藏文件。</p>
-<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>几个主要的配置文件：</p>
-<ul>
-<li>cuckoo.conf：用于配置常规行为和分析选项。</li>
-<li>auxiliary.conf：用于启用和配置辅助模块。</li>
-<li>\<machinery>.conf：用于定义虚拟化软件的选项（该文件与您在cuckoo.conf中选择的机器模块名称相同,virtualbox.conf和vmware.conf）。</machinery></li>
-<li>memory.conf：波动配置。</li>
-<li>processing.conf：用于启用和配置处理模块。</li>
-<li>reporting.conf：用于启用或禁用报告格式。</li>
-</ul>
-<h2 id="客户机安装及配置"><a href="#客户机安装及配置" class="headerlink" title="客户机安装及配置"></a>客户机安装及配置</h2><p>使用vmware安装windows7 64bit，配置一个内网网卡。<br>查看ubuntu16.04.1的ip地址，配置window7客户机的ipv4地址的默认网关和DNS地址为ubuntu的ip地址，如下：<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/ip-windows7.PNG" alt=""></p>
-<p>安装python2.7.10，并关闭windows防火墙和自动更新，原因为他们可能影响恶意软件的行为。<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/win7配置.PNG" alt=""></p>
-<p>为了正常运行，需要配置如下一些选项。</p>
-<ul>
-<li>启用自动登录</li>
-<li>启用远程RPC</li>
-<li>关闭分页（可选）</li>
-<li>禁用屏幕保护程序（可选）</li>
-</ul>
-<p>在Windows 7中，以管理员权限打开管理命令提示符，输入以下命令以启用自动登录和远程RPC。<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reg add "hklm\software\Microsoft\Windows NT\CurrentVersion\WinLogon" /v DefaultUserName /d &lt;USERNAME&gt; /t REG_SZ /f</span><br><span class="line">reg add "hklm\software\Microsoft\Windows NT\CurrentVersion\WinLogon" /v DefaultPassword /d &lt;PASSWORD&gt; /t REG_SZ /f</span><br><span class="line">reg add "hklm\software\Microsoft\Windows NT\CurrentVersion\WinLogon" /v AutoAdminLogon /d <span class="number">1</span> /t REG_SZ /f</span><br><span class="line">reg add "hklm\system\CurrentControlSet\Control\TerminalServer" /v AllowRemoteRPC /d <span class="number">0</span>x01 /t REG_DWORD /f</span><br><span class="line">reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v LocalAccountTokenFilterPolicy /d <span class="number">0</span>x01 /t REG_DWORD /f</span><br></pre></td></tr></table></figure></p>
-<p>前两条命令里的 \<username> 和 \<password> 为自己的账户和密码。</password></username></p>
-<p>找到之前安装的cuckoo路径下的agent/agent.py,并将其放到win7的启动目录下，<code>C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</code>，把agent.py后缀改为agent.pyw，这样程序启动就不会有GUI窗口。</p>
-<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><p>很多恶意软件都需要访问网络才可以正常运行，因此需要配置windows主机上网，使用host主机开启流量转发、用 iptables 做地址转换（NAT）规则。</p>
-<p>临时开启ip转发功能方式，系统重启之后便失效：</p>
-<ul>
-<li>sudo sysctl -w net.ipv4.ip_forward=1</li>
-<li>sudo echo 1 &gt; /proc/sys/net/ipv4/ip_forward</li>
-</ul>
-<p>若要重启后仍然有效，则需修改配置文件/etc/sysctl.conf，去掉net.ipv4.ip_forward=1 前的注释，之后执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sysctl -p /etc/sysctl.conf</span><br></pre></td></tr></table></figure></p>
-<p>然后配置Iptables的规则:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -A FORWARD -o eth0 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT</span><br><span class="line">sudo iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line">sudo iptables -A POSTROUTING -t nat -j MASQUERADE</span><br><span class="line"></span><br><span class="line">sudo vim /etc/network/interfaces</span><br><span class="line">编辑 Ubuntu 的网络配置文件 /etc/network/interfaces ，在文件末尾添加以下两行：</span><br><span class="line">pre-up iptables-restore &lt; /etc/iptables.rules #开机时启用 iptables 规则</span><br><span class="line">post-down iptables-save &gt; /etc/iptables.rules #关机前保存当前所有的 iptables 规则</span><br></pre></td></tr></table></figure></p>
-<p>效果如下：<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/ping.PNG" alt=""></p>
+<p>查看域控制器，这里已经是域控制器，就不查看了。域控制器命令<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dsquery server -limit <span class="number">0</span> | dsget server -dn -desc -dnsname -site -isgc</span><br></pre></td></tr></table></figure></p>
+<p>其dsquery和dsget命令不一一列举。</p>
+<p>使用net查看命令查看域信息。<br>net group /do</p>
+<p><img src="/2018/06/28/域渗透-公司内网/net_group.PNG" alt=""></p>
+<p>查看Domain Admins组成员，使用dsquery同样可以查询。<br>net group “Domain Admins” /do</p>
+<p><img src="/2018/06/28/域渗透-公司内网/Domain_Admins.PNG" alt=""></p>
+<p>在上面，我们使用net view查看信息时报错：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System error <span class="number">6118</span> has occurred.</span><br><span class="line"></span><br><span class="line">The list of servers <span class="keyword">for</span> this workgroup is <span class="keyword">not</span> currently available</span><br></pre></td></tr></table></figure></p>
+<p>需要从services.msc中打开Computer Browser，先将域管理员用户打开。</p>
+<h2 id="0x03-后记"><a href="#0x03-后记" class="headerlink" title="0x03 后记"></a>0x03 后记</h2><p>公司内网，就不使用mimikatz进行获取密码了。下班了，其他情况日后再说。</p>
 
       
     </div>
@@ -500,9 +472,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Cickoo-Sandbox/" rel="tag"><i class="fa fa-tag"></i> Cickoo Sandbox</a>
+            <a href="/tags/渗透测试/" rel="tag"><i class="fa fa-tag"></i> 渗透测试</a>
           
-            <a href="/tags/工具安装/" rel="tag"><i class="fa fa-tag"></i> 工具安装</a>
+            <a href="/tags/内网/" rel="tag"><i class="fa fa-tag"></i> 内网</a>
           
         </div>
       
@@ -515,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/01/Android逆向-smali语法/" rel="next" title="Android逆向-smali语法">
-                <i class="fa fa-chevron-left"></i> Android逆向-smali语法
+              <a href="/2018/06/06/Cuckoo-Sandbox学习-安装篇/" rel="next" title="Cuckoo-Sandbox学习-安装篇">
+                <i class="fa fa-chevron-left"></i> Cuckoo-Sandbox学习-安装篇
               </a>
             
           </div>
@@ -524,10 +496,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/28/域渗透-公司内网/" rel="prev" title="渗透测试-公司内网">
-                渗透测试-公司内网 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -703,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装环境"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装准备"><span class="nav-number">2.</span> <span class="nav-text">安装准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Cuckoo"><span class="nav-number">3.</span> <span class="nav-text">安装Cuckoo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件"><span class="nav-number">4.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户机安装及配置"><span class="nav-number">5.</span> <span class="nav-text">客户机安装及配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络配置"><span class="nav-number">6.</span> <span class="nav-text">网络配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-问题发现"><span class="nav-number">1.</span> <span class="nav-text">0x01 问题发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-漏洞利用"><span class="nav-number">2.</span> <span class="nav-text">0x02 漏洞利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-域信息收集"><span class="nav-number">3.</span> <span class="nav-text">0x02 域信息收集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-后记"><span class="nav-number">4.</span> <span class="nav-text">0x03 后记</span></a></li></ol></div>
             
 
           </div>
