@@ -102,13 +102,13 @@
 
 
 
-  <meta name="description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图： 0x02 漏洞利用直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图： 查看权限，直接为system权限。  其他查看信息的命令不一一列举。 进入cmd，发现kali控制台显示乱码，使用chc">
+  <meta name="description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：">
 <meta name="keywords" content="渗透测试,内网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="渗透测试-公司内网">
 <meta property="og:url" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/index.html">
 <meta property="og:site_name" content="zering的博客">
-<meta property="og:description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图： 0x02 漏洞利用直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图： 查看权限，直接为system权限。  其他查看信息的命令不一一列举。 进入cmd，发现kali控制台显示乱码，使用chc">
+<meta property="og:description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/漏洞.PNG">
 <meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/meterpreter.PNG">
@@ -117,10 +117,10 @@
 <meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/域控.PNG">
 <meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/net_group.PNG">
 <meta property="og:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/Domain_Admins.PNG">
-<meta property="og:updated_time" content="2018-06-28T10:20:56.688Z">
+<meta property="og:updated_time" content="2018-06-28T10:22:51.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="渗透测试-公司内网">
-<meta name="twitter:description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图： 0x02 漏洞利用直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图： 查看权限，直接为system权限。  其他查看信息的命令不一一列举。 进入cmd，发现kali控制台显示乱码，使用chc">
+<meta name="twitter:description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：">
 <meta name="twitter:image" content="http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/漏洞.PNG">
 
 
@@ -348,7 +348,7 @@
                 
               
 
-              <time title="创建时间：2018-06-28 08:43:04 / 修改时间：18:20:56" itemprop="dateCreated datePublished" datetime="2018-06-28T08:43:04+08:00">2018-06-28</time>
+              <time title="创建时间：2018-06-28 08:43:04 / 修改时间：18:22:51" itemprop="dateCreated datePublished" datetime="2018-06-28T08:43:04+08:00">2018-06-28</time>
             
 
             
@@ -414,7 +414,7 @@
       
 
       
-        <h2 id="0x01-问题发现"><a href="#0x01-问题发现" class="headerlink" title="0x01 问题发现"></a>0x01 问题发现</h2><p>前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：<br><img src="/2018/06/28/域渗透-公司内网/漏洞.PNG" alt=""></p>
+        <h2 id="0x01-问题发现"><a href="#0x01-问题发现" class="headerlink" title="0x01 问题发现"></a>0x01 问题发现</h2><p>前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：<br><img src="/2018/06/28/域渗透-公司内网/漏洞.PNG" alt=""><br><a id="more"></a></p>
 <h2 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02 漏洞利用"></a>0x02 漏洞利用</h2><p>直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图：<br><img src="/2018/06/28/域渗透-公司内网/meterpreter.PNG" alt=""></p>
 <p>查看权限，直接为system权限。</p>
 <p><img src="/2018/06/28/域渗透-公司内网/getuid.PNG" alt=""></p>
