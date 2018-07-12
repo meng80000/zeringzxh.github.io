@@ -102,25 +102,24 @@
 
 
 
-  <meta name="description" content="Cuckoo Sandbox是一个开源的恶意文件自动化分析系统，通过Cuckoo Sandbox可以方便地帮助安全研究人员验证恶意程序的特征信息。 安装环境本人在vmware中建立两个虚拟机，一个host，一个guest。VMware 12 Proubuntu-16.04.1-desktop-amd64window7-64bit">
-<meta name="keywords" content="Cickoo Sandbox,工具安装">
+  <meta name="description" content="NetFlowNetFlow是一种数据交换方式，由思科于1990年开发。其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
+<meta name="keywords" content="NetFlow,WireShark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cuckoo-Sandbox学习-安装篇">
-<meta property="og:url" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/index.html">
+<meta property="og:title" content="流量分析入门">
+<meta property="og:url" content="http://zeringzxh.github.io/2018/07/12/流量分析入门/index.html">
 <meta property="og:site_name" content="zering的博客">
-<meta property="og:description" content="Cuckoo Sandbox是一个开源的恶意文件自动化分析系统，通过Cuckoo Sandbox可以方便地帮助安全研究人员验证恶意程序的特征信息。 安装环境本人在vmware中建立两个虚拟机，一个host，一个guest。VMware 12 Proubuntu-16.04.1-desktop-amd64window7-64bit">
+<meta property="og:description" content="NetFlowNetFlow是一种数据交换方式，由思科于1990年开发。其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/网卡-ubuntu.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/install.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/run.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/ip-windows7.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/win7配置.PNG">
-<meta property="og:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/ping.PNG">
-<meta property="og:updated_time" content="2018-06-09T10:57:33.375Z">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/07/12/流量分析入门/NetFlow.png">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/07/12/流量分析入门/WireShark.png">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/07/12/流量分析入门/文件属性.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/07/12/流量分析入门/统计_Endpoints.png">
+<meta property="og:image" content="http://zeringzxh.github.io/2018/07/12/流量分析入门/Conversations.PNG">
+<meta property="og:updated_time" content="2018-07-12T07:50:11.016Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cuckoo-Sandbox学习-安装篇">
-<meta name="twitter:description" content="Cuckoo Sandbox是一个开源的恶意文件自动化分析系统，通过Cuckoo Sandbox可以方便地帮助安全研究人员验证恶意程序的特征信息。 安装环境本人在vmware中建立两个虚拟机，一个host，一个guest。VMware 12 Proubuntu-16.04.1-desktop-amd64window7-64bit">
-<meta name="twitter:image" content="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/网卡-ubuntu.PNG">
+<meta name="twitter:title" content="流量分析入门">
+<meta name="twitter:description" content="NetFlowNetFlow是一种数据交换方式，由思科于1990年开发。其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
+<meta name="twitter:image" content="http://zeringzxh.github.io/2018/07/12/流量分析入门/NetFlow.png">
 
 
 
@@ -129,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/"/>
+  <link rel="canonical" href="http://zeringzxh.github.io/2018/07/12/流量分析入门/"/>
 
 
 
@@ -139,7 +138,7 @@
   };
 </script>
 
-  <title>Cuckoo-Sandbox学习-安装篇 | zering的博客</title>
+  <title>流量分析入门 | zering的博客</title>
   
 
 
@@ -305,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zeringzxh.github.io/2018/06/06/Cuckoo-Sandbox学习-安装篇/">
+    <link itemprop="mainEntityOfPage" href="http://zeringzxh.github.io/2018/07/12/流量分析入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zering">
@@ -322,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Cuckoo-Sandbox学习-安装篇
+          <h1 class="post-title" itemprop="name headline">流量分析入门
               
             
           </h1>
@@ -347,24 +346,12 @@
                 
               
 
-              <time title="创建时间：2018-06-06 14:11:45" itemprop="dateCreated datePublished" datetime="2018-06-06T14:11:45+08:00">2018-06-06</time>
+              <time title="创建时间：2018-07-12 14:34:19 / 修改时间：15:50:11" itemprop="dateCreated datePublished" datetime="2018-07-12T14:34:19+08:00">2018-07-12</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-06-09 18:57:33" itemprop="dateModified" datetime="2018-06-09T18:57:33+08:00">2018-06-09</time>
               
             
           </span>
@@ -381,7 +368,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Cuckoo-Sandbox/" itemprop="url" rel="index"><span itemprop="name">Cuckoo Sandbox</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/流量分析/" itemprop="url" rel="index"><span itemprop="name">流量分析</span></a></span>
 
                 
                 
@@ -396,8 +383,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/06/Cuckoo-Sandbox学习-安装篇/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/06/Cuckoo-Sandbox学习-安装篇/" itemprop="commentCount"></span>
+                <a href="/2018/07/12/流量分析入门/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/12/流量分析入门/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -425,50 +412,53 @@
       
 
       
-        <p>Cuckoo Sandbox是一个开源的恶意文件自动化分析系统，通过Cuckoo Sandbox可以方便地帮助安全研究人员验证恶意程序的特征信息。</p>
-<h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><p>本人在vmware中建立两个虚拟机，一个host，一个guest。<br>VMware 12 Pro<br>ubuntu-16.04.1-desktop-amd64<br>window7-64bit<br><a id="more"></a></p>
-<h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><p>使用vmware安装ubuntu-16.04.1-desktop-amd64，添加2个网卡，一个NAT模式，一个内网网卡。<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/网卡-ubuntu.PNG" alt=""></p>
-<p>依赖库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python python-pip python-dev libffi-dev libssl-dev</span><br><span class="line">$ sudo apt-get install python-virtualenv python-setuptools</span><br><span class="line">$ sudo apt-get install libjpeg-dev zlib1g-dev swig</span><br></pre></td></tr></table></figure></p>
-<p>为了使用基于Django的Web界面,使用PostgreSQL作为数据库，需要安装MongoDB和PostgreSQL。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install mongodb</span><br><span class="line">$ sudo apt-get install postgresql libpq-dev</span><br></pre></td></tr></table></figure></p>
-<p>建议首先升级pip和setuptools库，因为它们经常过时，导致试图安装Cuckoo时出现问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pip install -U pip setuptools</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>若使用virtual box则创建一个cuckoo用户，将其添加到vboxusers组里<font color="red">（VirtualBox安装后创建）</font>。确保运行Cuckoo的用户与用于创建和运行虚拟机的用户相同（至少在VirtualBox的情况下），否则Cuckoo将无法识别和启动这些虚拟机。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo adduser cuckoo</span><br><span class="line">$ sudo usermod -a -G vboxusers cuckoo</span><br></pre></td></tr></table></figure></p>
-<p>安装VirtualBox<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install virtualbox</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="安装Cuckoo"><a href="#安装Cuckoo" class="headerlink" title="安装Cuckoo"></a>安装Cuckoo</h2><p>使用一条命令安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pip install -U cuckoo</span><br></pre></td></tr></table></figure></p>
-<p>部分依赖需要翻墙，安装成功如下：<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/install.PNG" alt=""></p>
-<p>如果在本地使用virtual box则切换cuckoo用户并运行，<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/run.PNG" alt=""></p>
-<p>从中可以看出配置文件路径为<em>/home/cuckoo/.cuckoo/conf</em>，工作目录路径可以修改，.cuckoo为隐藏目录，使用<code>ctrl+h</code>查看隐藏文件。</p>
-<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>几个主要的配置文件：</p>
+        <h2 id="NetFlow"><a href="#NetFlow" class="headerlink" title="NetFlow"></a>NetFlow</h2><p>NetFlow是一种数据交换方式，由思科于1990年开发。其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。<br><a id="more"></a></p>
+<h3 id="NetFlow输出格式"><a href="#NetFlow输出格式" class="headerlink" title="NetFlow输出格式"></a>NetFlow输出格式</h3><p>NetFlow输出格式为报头+一系列Flow流。报头包含序列号、记录数、系统时间等，Flow流包含IP地址、端口、路由信息等。</p>
+<p>一个IP数据包的Flow流至少定义了7个关键元素：</p>
 <ul>
-<li>cuckoo.conf：用于配置常规行为和分析选项。</li>
-<li>auxiliary.conf：用于启用和配置辅助模块。</li>
-<li>\<machinery>.conf：用于定义虚拟化软件的选项（该文件与您在cuckoo.conf中选择的机器模块名称相同,virtualbox.conf和vmware.conf）。</machinery></li>
-<li>memory.conf：波动配置。</li>
-<li>processing.conf：用于启用和配置处理模块。</li>
-<li>reporting.conf：用于启用或禁用报告格式。</li>
+<li>源IP地址；</li>
+<li>目的IP地址；</li>
+<li>源端口号；</li>
+<li>目的端口号；</li>
+<li>第三层协议类型；</li>
+<li>TOS字段；</li>
+<li>网络设备输入/输出的逻辑端口。</li>
 </ul>
-<h2 id="客户机安装及配置"><a href="#客户机安装及配置" class="headerlink" title="客户机安装及配置"></a>客户机安装及配置</h2><p>使用vmware安装windows7 64bit，配置一个内网网卡。<br>查看ubuntu16.04.1的ip地址，配置window7客户机的ipv4地址的默认网关和DNS地址为ubuntu的ip地址，如下：<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/ip-windows7.PNG" alt=""></p>
-<p>安装python2.7.10，并关闭windows防火墙和自动更新，原因为他们可能影响恶意软件的行为。<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/win7配置.PNG" alt=""></p>
-<p>为了正常运行，需要配置如下一些选项。</p>
+<p>OSSIM提供可视化NetFlow图形界面，如下图：<br><img src="/2018/07/12/流量分析入门/NetFlow.png" alt=""></p>
+<h3 id="NetFlow监测恶意代码"><a href="#NetFlow监测恶意代码" class="headerlink" title="NetFlow监测恶意代码"></a>NetFlow监测恶意代码</h3><p>NetFlow数据流获取方便，当网络正常运行时，NetFlow数据流是有一定的规律性的，当网络中存在异常流量时，网络流量会发生异常的波动。<br>监测蠕虫的策略：选取几个不同时间段，若时间段内符合特征的Flow超过上限值，则为病毒。</p>
+<h3 id="反应网络运行的核心参数"><a href="#反应网络运行的核心参数" class="headerlink" title="反应网络运行的核心参数"></a>反应网络运行的核心参数</h3><ul>
+<li>平均每秒流量：如果网络内部存在大流量的攻击或P2P等大流量的下载等异常流量时，其数值会比正常时大很多。</li>
+<li>平均每秒包数：大部分的异常流量都会产生非常多的数据包数。</li>
+<li>数据包大小分布：64字节左右的小包和1500字节左右的大包的分布比例较小，小包过多，可能存在扫描、攻击行为，大包过多可能存在消耗带宽资源的大包DOS攻击行为。<br>*平均包长：网络内的平均包长会在500-700字节左右。</li>
+<li>TCP会话数、UDP会话数、IP地址个数、MAC地址个数。。。</li>
+</ul>
+<h2 id="WireShark"><a href="#WireShark" class="headerlink" title="WireShark"></a>WireShark</h2><p> WireShark是目前世界上最流行的网络分析工具，如下图：<br><img src="/2018/07/12/流量分析入门/WireShark.png" alt=""></p>
+<h3 id="界面详解"><a href="#界面详解" class="headerlink" title="界面详解"></a>界面详解</h3><p>1.过滤器规则：</p>
 <ul>
-<li>启用自动登录</li>
-<li>启用远程RPC</li>
-<li>关闭分页（可选）</li>
-<li>禁用屏幕保护程序（可选）</li>
+<li>tcp-&gt;只显示TCP协议的记录；</li>
+<li>http-&gt;只看HTTP协议的记录；</li>
+<li>ip.src ==192.168.1.102 -&gt;显示源地址为192.168.1.102的记录；</li>
+<li>ip.dst==192.168.1.102 -&gt;目标地址为192.168.1.10的记录；</li>
+<li>ip.addr == 42.121.252.58 -&gt;只显示与某主机的通信；</li>
+<li>tcp.port ==80-&gt;端口为80的；</li>
+<li>tcp.srcport == 80 -&gt;只显示TCP协议的源端口为80的；</li>
+<li>http.request.method==”GET”  -&gt;只显示HTTP GET方法的；</li>
+<li>eth.type == 0x806-&gt;只显示ARP报文，这个字段的值表示是ARP报文，如果是ip报文此值为0x8000（可在表达式中选取对应的16进制值）。</li>
 </ul>
-<p>在Windows 7中，以管理员权限打开管理命令提示符，输入以下命令以启用自动登录和远程RPC。<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">reg add "hklm\software\Microsoft\Windows NT\CurrentVersion\WinLogon" /v DefaultUserName /d &lt;USERNAME&gt; /t REG_SZ /f</span><br><span class="line">reg add "hklm\software\Microsoft\Windows NT\CurrentVersion\WinLogon" /v DefaultPassword /d &lt;PASSWORD&gt; /t REG_SZ /f</span><br><span class="line">reg add "hklm\software\Microsoft\Windows NT\CurrentVersion\WinLogon" /v AutoAdminLogon /d <span class="number">1</span> /t REG_SZ /f</span><br><span class="line">reg add "hklm\system\CurrentControlSet\Control\TerminalServer" /v AllowRemoteRPC /d <span class="number">0</span>x01 /t REG_DWORD /f</span><br><span class="line">reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v LocalAccountTokenFilterPolicy /d <span class="number">0</span>x01 /t REG_DWORD /f</span><br></pre></td></tr></table></figure></p>
-<p>前两条命令里的 \<username> 和 \<password> 为自己的账户和密码。</password></username></p>
-<p>找到之前安装的cuckoo路径下的agent/agent.py,并将其放到win7的启动目录下，<code>C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</code>，把agent.py后缀改为agent.pyw，这样程序启动就不会有GUI窗口。</p>
-<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><p>很多恶意软件都需要访问网络才可以正常运行，因此需要配置windows主机上网，使用host主机开启流量转发、用 iptables 做地址转换（NAT）规则。</p>
-<p>临时开启ip转发功能方式，系统重启之后便失效：</p>
+<p>2.封包列表：<br>封包列表的面板中显示，编号，时间戳，源地址，目标地址，协议，长度，以及封包信息。</p>
+<p>3.封包的详细信息：<br>在封包信息中，每行对应的含义及在OSI模型中的对应关系如下：</p>
 <ul>
-<li>sudo sysctl -w net.ipv4.ip_forward=1</li>
-<li>sudo echo 1 &gt; /proc/sys/net/ipv4/ip_forward</li>
+<li>Frame:   物理层的数据帧概况  -&gt;对应OSI七层模型中的【物理层】</li>
+<li>Ethernet II: 数据链路层以太网帧头部信息  -&gt;对应OSI七层模型中的【数据链路层】</li>
+<li>Internet Protocol Version 4: 互联网层IP包头部信息  -&gt;对应OSI七层模型中的【网络层】</li>
+<li>Transmission Control Protocol:  传输层T的数据段头部信息，此处是TCP  -&gt;对应OSI七层模型中的【传输层】</li>
+<li>Hypertext Transfer Protocol:  应用层的信息，此处是HTTP协议  -&gt;对应OSI七层模型中的【应用层】</li>
 </ul>
-<p>若要重启后仍然有效，则需修改配置文件/etc/sysctl.conf，去掉net.ipv4.ip_forward=1 前的注释，之后执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sysctl -p /etc/sysctl.conf</span><br></pre></td></tr></table></figure></p>
-<p>然后配置Iptables的规则:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -A FORWARD -o eth0 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT</span><br><span class="line">sudo iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line">sudo iptables -A POSTROUTING -t nat -j MASQUERADE</span><br><span class="line"></span><br><span class="line">sudo vim /etc/network/interfaces</span><br><span class="line">编辑 Ubuntu 的网络配置文件 /etc/network/interfaces ，在文件末尾添加以下两行：</span><br><span class="line">pre-up iptables-restore &lt; /etc/iptables.rules #开机时启用 iptables 规则</span><br><span class="line">post-down iptables-save &gt; /etc/iptables.rules #关机前保存当前所有的 iptables 规则</span><br></pre></td></tr></table></figure></p>
-<p>效果如下：<br><img src="/2018/06/06/Cuckoo-Sandbox学习-安装篇/ping.PNG" alt=""></p>
+<h3 id="WireShark统计模块"><a href="#WireShark统计模块" class="headerlink" title="WireShark统计模块"></a>WireShark统计模块</h3><h4 id="捕获文件的属性"><a href="#捕获文件的属性" class="headerlink" title="捕获文件的属性"></a>捕获文件的属性</h4><p><img src="/2018/07/12/流量分析入门/文件属性.PNG" alt=""><br>这一菜单简单收集所有抓包数据，在定义了过滤条件的时候，将呈现过滤后的数据。当想要知道每秒的平均报文数或是字节数时，可以使用此工具。</p>
+<h4 id="Endpoint"><a href="#Endpoint" class="headerlink" title="Endpoint"></a>Endpoint</h4><p><img src="/2018/07/12/流量分析入门/统计_Endpoints.png" alt=""><br>此窗口中，能够看到第2,3,4层的endpoints，也就是以太网，IP, TCP或UDP。查看收发大量数据流的IP地址。</p>
+<h4 id="Conversations"><a href="#Conversations" class="headerlink" title="Conversations"></a>Conversations</h4><p><img src="/2018/07/12/流量分析入门/Conversations.PNG" alt=""><br>显示2层以太网统计数据，第3层IP统计数据，或第4层TCP或UDP统计数据，网络会话是两个指定终端之间的数据流。例如，IP会话是两个IP地址之间的所有数据流，TCP会话包含了所有TCP连接。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/Chilam007/p/6973990.html" target="_blank" rel="noopener"> 抓包工具 - Wireshark（详细介绍与TCP三次握手数据分析）
+</a></p>
 
       
     </div>
@@ -500,9 +490,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Cickoo-Sandbox/" rel="tag"><i class="fa fa-tag"></i> Cickoo Sandbox</a>
+            <a href="/tags/NetFlow/" rel="tag"><i class="fa fa-tag"></i> NetFlow</a>
           
-            <a href="/tags/工具安装/" rel="tag"><i class="fa fa-tag"></i> 工具安装</a>
+            <a href="/tags/WireShark/" rel="tag"><i class="fa fa-tag"></i> WireShark</a>
           
         </div>
       
@@ -515,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/01/Android逆向-smali语法/" rel="next" title="Android逆向-smali语法">
-                <i class="fa fa-chevron-left"></i> Android逆向-smali语法
+              <a href="/2018/06/28/域渗透-公司内网/" rel="next" title="渗透测试-公司内网">
+                <i class="fa fa-chevron-left"></i> 渗透测试-公司内网
               </a>
             
           </div>
@@ -524,10 +514,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/28/域渗透-公司内网/" rel="prev" title="渗透测试-公司内网">
-                渗透测试-公司内网 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -727,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装环境"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装准备"><span class="nav-number">2.</span> <span class="nav-text">安装准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Cuckoo"><span class="nav-number">3.</span> <span class="nav-text">安装Cuckoo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件"><span class="nav-number">4.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户机安装及配置"><span class="nav-number">5.</span> <span class="nav-text">客户机安装及配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络配置"><span class="nav-number">6.</span> <span class="nav-text">网络配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NetFlow"><span class="nav-number">1.</span> <span class="nav-text">NetFlow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NetFlow输出格式"><span class="nav-number">1.1.</span> <span class="nav-text">NetFlow输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NetFlow监测恶意代码"><span class="nav-number">1.2.</span> <span class="nav-text">NetFlow监测恶意代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反应网络运行的核心参数"><span class="nav-number">1.3.</span> <span class="nav-text">反应网络运行的核心参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WireShark"><span class="nav-number">2.</span> <span class="nav-text">WireShark</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#界面详解"><span class="nav-number">2.1.</span> <span class="nav-text">界面详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WireShark统计模块"><span class="nav-number">2.2.</span> <span class="nav-text">WireShark统计模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#捕获文件的属性"><span class="nav-number">2.2.1.</span> <span class="nav-text">捕获文件的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Endpoint"><span class="nav-number">2.2.2.</span> <span class="nav-text">Endpoint</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conversations"><span class="nav-number">2.2.3.</span> <span class="nav-text">Conversations</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

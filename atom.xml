@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zeringzxh.github.io/"/>
-  <updated>2018-06-28T10:29:52.708Z</updated>
+  <updated>2018-07-12T07:50:11.016Z</updated>
   <id>http://zeringzxh.github.io/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>流量分析入门</title>
+    <link href="http://zeringzxh.github.io/2018/07/12/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/"/>
+    <id>http://zeringzxh.github.io/2018/07/12/流量分析入门/</id>
+    <published>2018-07-12T06:34:19.000Z</published>
+    <updated>2018-07-12T07:50:11.016Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="NetFlow"><a href="#NetFlow" class="headerlink" title="NetFlow"></a>NetFlow</h2><p>NetFlow是一种数据交换方式，由思科于1990年开发。其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。<br><a id="more"></a></p><h3 id="NetFlow输出格式"><a href="#NetFlow输出格式" class="headerlink" title="NetFlow输出格式"></a>NetFlow输出格式</h3><p>NetFlow输出格式为报头+一系列Flow流。报头包含序列号、记录数、系统时间等，Flow流包含IP地址、端口、路由信息等。</p><p>一个IP数据包的Flow流至少定义了7个关键元素：</p><ul><li>源IP地址；</li><li>目的IP地址；</li><li>源端口号；</li><li>目的端口号；</li><li>第三层协议类型；</li><li>TOS字段；</li><li>网络设备输入/输出的逻辑端口。</li></ul><p>OSSIM提供可视化NetFlow图形界面，如下图：<br><img src="/2018/07/12/流量分析入门/NetFlow.png" alt=""></p><h3 id="NetFlow监测恶意代码"><a href="#NetFlow监测恶意代码" class="headerlink" title="NetFlow监测恶意代码"></a>NetFlow监测恶意代码</h3><p>NetFlow数据流获取方便，当网络正常运行时，NetFlow数据流是有一定的规律性的，当网络中存在异常流量时，网络流量会发生异常的波动。<br>监测蠕虫的策略：选取几个不同时间段，若时间段内符合特征的Flow超过上限值，则为病毒。</p><h3 id="反应网络运行的核心参数"><a href="#反应网络运行的核心参数" class="headerlink" title="反应网络运行的核心参数"></a>反应网络运行的核心参数</h3><ul><li>平均每秒流量：如果网络内部存在大流量的攻击或P2P等大流量的下载等异常流量时，其数值会比正常时大很多。</li><li>平均每秒包数：大部分的异常流量都会产生非常多的数据包数。</li><li>数据包大小分布：64字节左右的小包和1500字节左右的大包的分布比例较小，小包过多，可能存在扫描、攻击行为，大包过多可能存在消耗带宽资源的大包DOS攻击行为。<br>*平均包长：网络内的平均包长会在500-700字节左右。</li><li>TCP会话数、UDP会话数、IP地址个数、MAC地址个数。。。</li></ul><h2 id="WireShark"><a href="#WireShark" class="headerlink" title="WireShark"></a>WireShark</h2><p> WireShark是目前世界上最流行的网络分析工具，如下图：<br><img src="/2018/07/12/流量分析入门/WireShark.png" alt=""></p><h3 id="界面详解"><a href="#界面详解" class="headerlink" title="界面详解"></a>界面详解</h3><p>1.过滤器规则：</p><ul><li>tcp-&gt;只显示TCP协议的记录；</li><li>http-&gt;只看HTTP协议的记录；</li><li>ip.src ==192.168.1.102 -&gt;显示源地址为192.168.1.102的记录；</li><li>ip.dst==192.168.1.102 -&gt;目标地址为192.168.1.10的记录；</li><li>ip.addr == 42.121.252.58 -&gt;只显示与某主机的通信；</li><li>tcp.port ==80-&gt;端口为80的；</li><li>tcp.srcport == 80 -&gt;只显示TCP协议的源端口为80的；</li><li>http.request.method==”GET”  -&gt;只显示HTTP GET方法的；</li><li>eth.type == 0x806-&gt;只显示ARP报文，这个字段的值表示是ARP报文，如果是ip报文此值为0x8000（可在表达式中选取对应的16进制值）。</li></ul><p>2.封包列表：<br>封包列表的面板中显示，编号，时间戳，源地址，目标地址，协议，长度，以及封包信息。</p><p>3.封包的详细信息：<br>在封包信息中，每行对应的含义及在OSI模型中的对应关系如下：</p><ul><li>Frame:   物理层的数据帧概况  -&gt;对应OSI七层模型中的【物理层】</li><li>Ethernet II: 数据链路层以太网帧头部信息  -&gt;对应OSI七层模型中的【数据链路层】</li><li>Internet Protocol Version 4: 互联网层IP包头部信息  -&gt;对应OSI七层模型中的【网络层】</li><li>Transmission Control Protocol:  传输层T的数据段头部信息，此处是TCP  -&gt;对应OSI七层模型中的【传输层】</li><li>Hypertext Transfer Protocol:  应用层的信息，此处是HTTP协议  -&gt;对应OSI七层模型中的【应用层】</li></ul><h3 id="WireShark统计模块"><a href="#WireShark统计模块" class="headerlink" title="WireShark统计模块"></a>WireShark统计模块</h3><h4 id="捕获文件的属性"><a href="#捕获文件的属性" class="headerlink" title="捕获文件的属性"></a>捕获文件的属性</h4><p><img src="/2018/07/12/流量分析入门/文件属性.PNG" alt=""><br>这一菜单简单收集所有抓包数据，在定义了过滤条件的时候，将呈现过滤后的数据。当想要知道每秒的平均报文数或是字节数时，可以使用此工具。</p><h4 id="Endpoint"><a href="#Endpoint" class="headerlink" title="Endpoint"></a>Endpoint</h4><p><img src="/2018/07/12/流量分析入门/统计_Endpoints.png" alt=""><br>此窗口中，能够看到第2,3,4层的endpoints，也就是以太网，IP, TCP或UDP。查看收发大量数据流的IP地址。</p><h4 id="Conversations"><a href="#Conversations" class="headerlink" title="Conversations"></a>Conversations</h4><p><img src="/2018/07/12/流量分析入门/Conversations.PNG" alt=""><br>显示2层以太网统计数据，第3层IP统计数据，或第4层TCP或UDP统计数据，网络会话是两个指定终端之间的数据流。例如，IP会话是两个IP地址之间的所有数据流，TCP会话包含了所有TCP连接。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/Chilam007/p/6973990.html" target="_blank" rel="noopener"> 抓包工具 - Wireshark（详细介绍与TCP三次握手数据分析）</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;NetFlow&quot;&gt;&lt;a href=&quot;#NetFlow&quot; class=&quot;headerlink&quot; title=&quot;NetFlow&quot;&gt;&lt;/a&gt;NetFlow&lt;/h2&gt;&lt;p&gt;NetFlow是一种数据交换方式，由思科于1990年开发。其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="流量分析" scheme="http://zeringzxh.github.io/categories/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/"/>
+    
+    
+      <category term="NetFlow" scheme="http://zeringzxh.github.io/tags/NetFlow/"/>
+    
+      <category term="WireShark" scheme="http://zeringzxh.github.io/tags/WireShark/"/>
+    
+  </entry>
+  
+  <entry>
     <title>渗透测试-公司内网</title>
     <link href="http://zeringzxh.github.io/2018/06/28/%E5%9F%9F%E6%B8%97%E9%80%8F-%E5%85%AC%E5%8F%B8%E5%86%85%E7%BD%91/"/>
     <id>http://zeringzxh.github.io/2018/06/28/域渗透-公司内网/</id>
     <published>2018-06-28T00:43:04.000Z</published>
-    <updated>2018-06-28T10:29:52.708Z</updated>
+    <updated>2018-06-28T10:30:20.911Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x01-问题发现"><a href="#0x01-问题发现" class="headerlink" title="0x01 问题发现"></a>0x01 问题发现</h2><p>前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：<br><img src="/2018/06/28/域渗透-公司内网/漏洞.PNG" alt=""><br><a id="more"></a></p><h2 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02 漏洞利用"></a>0x02 漏洞利用</h2><p>直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图：<br><img src="/2018/06/28/域渗透-公司内网/meterpreter.PNG" alt=""></p><p>查看权限，直接为system权限。</p><p><img src="/2018/06/28/域渗透-公司内网/getuid.PNG" alt=""></p><p>其他查看信息的命令不一一列举。</p><p>进入cmd，发现kali控制台显示乱码，使用chcp 65001命令解决：</p><p><img src="/2018/06/28/域渗透-公司内网/乱码.PNG" alt=""></p><p>查看systeminfo信息，发现是域控。。。。。</p><p><img src="/2018/06/28/域渗透-公司内网/域控.PNG" alt=""></p><h2 id="0x02-域信息收集"><a href="#0x02-域信息收集" class="headerlink" title="0x02 域信息收集"></a>0x02 域信息收集</h2><p>windows server机器，使用dsget和dsquery进行域信息收集。<br>使用命令查看全域信息，内容太多，就不截图了<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dsquery * -limit <span class="number">0</span> -attr *</span><br></pre></td></tr></table></figure></p><hr><p>CN, OU, DC 都是 LDAP 连接服务器的端字符串中的区别名称（DN, distinguished   name）</p><pre><code>DC (Domain Component)CN (Common Name)OU (Organizational Unit)</code></pre><p>例如：CN=test,OU=developer,DC=domainname,DC=com</p><p>在上面的代码中 cn=test 可能代表一个用户名，ou=developer 代表一个 active directory 中的组织单位。这句话的含义可能就是说明 test 这个对象处在domainname.com 域的 developer 组织单元中</p><hr><p>查看域控制器，这里已经是域控制器，就不查看了。域控制器命令<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dsquery server -limit <span class="number">0</span> | dsget server -dn -desc -dnsname -site -isgc</span><br></pre></td></tr></table></figure></p><p>其dsquery和dsget命令不一一列举。</p><p>使用net查看命令查看域信息。<br>net group /do</p><p><img src="/2018/06/28/域渗透-公司内网/net_group.PNG" alt=""></p><p>查看Domain Admins组成员，使用dsquery同样可以查询。<br>net group “Domain Admins” /do</p><p><img src="/2018/06/28/域渗透-公司内网/Domain_Admins.PNG" alt=""></p><p>在上面，我们使用net view查看信息时报错：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System error <span class="number">6118</span> has occurred.</span><br><span class="line"></span><br><span class="line">The list of servers <span class="keyword">for</span> this workgroup is <span class="keyword">not</span> currently available</span><br></pre></td></tr></table></figure></p><p>需要从services.msc中打开Computer Browser，先将域管理员用户打开。</p><h2 id="0x03-后记"><a href="#0x03-后记" class="headerlink" title="0x03 后记"></a>0x03 后记</h2><p>公司内网，就不使用mimikatz进行获取密码了。下班了，其他情况日后再说。<br>黄金票据，白银票据等内容可以查看此博客：<br><a href="https://1sparrow.com/2018/02/19/%E5%9F%9F%E6%B8%97%E9%80%8F%E7%9B%B8%E5%85%B3/" target="_blank" rel="noopener">域渗透相关</a></p>]]></content>
     
