@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://zeringzxh.github.io/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/重定向.PNG">
 <meta property="og:image" content="http://zeringzxh.github.io/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/log文件位置.PNG">
 <meta property="og:image" content="http://zeringzxh.github.io/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/log信息.PNG">
-<meta property="og:updated_time" content="2018-08-15T03:15:10.301Z">
+<meta property="og:updated_time" content="2018-08-15T03:52:52.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PhEmail:邮件钓鱼测试工具实际使用踩过的坑">
 <meta name="twitter:description" content="PhEmail简介PhEmail是基于python编写的一款网络钓鱼邮件测试工具。PhEmail可以同时向多个用户发送钓鱼邮件，并记录点击的用户的邮箱和IP等信息。PhEmail可以通过Google收集邮箱，完成邮箱收集工作。该工具可以用于公司内部邮箱钓鱼测试，可结合beef使用。 PhEmail项目主页：PhEmail钓鱼邮件工具">
@@ -346,7 +346,7 @@
                 
               
 
-              <time title="创建时间：2018-08-15 09:40:30 / 修改时间：11:15:10" itemprop="dateCreated datePublished" datetime="2018-08-15T09:40:30+08:00">2018-08-15</time>
+              <time title="创建时间：2018-08-15 09:40:30 / 修改时间：11:52:52" itemprop="dateCreated datePublished" datetime="2018-08-15T09:40:30+08:00">2018-08-15</time>
             
 
             
@@ -439,8 +439,8 @@
 <h4 id="邮件标题乱码"><a href="#邮件标题乱码" class="headerlink" title="邮件标题乱码"></a>邮件标题乱码</h4><p>在导入包时添加如下内容<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="string">'utf8'</span>)</span><br></pre></td></tr></table></figure></p>
 <p>对邮件标题进行unicode编码，在发送邮件时添加如下代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> isinstance(SUBJECT):</span><br><span class="line">      SUBJECT = unicode(SUBJECT,unicode)</span><br><span class="line">msg[<span class="string">'subject'</span>] = SUBJECT</span><br></pre></td></tr></table></figure></p>
 <h4 id="邮件内容乱码"><a href="#邮件内容乱码" class="headerlink" title="邮件内容乱码"></a>邮件内容乱码</h4><p>添加如下代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msg[<span class="string">"Accept-Language"</span>]=<span class="string">"zh-CN"</span></span><br><span class="line">msg[<span class="string">"Accept-Charset"</span>]=<span class="string">"ISO-8859-1,utf-8"</span></span><br></pre></td></tr></table></figure></p>
-<p>并将<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msgAlt.attach(MIMEText(body.format(url),&apos;html&apos;))</span><br></pre></td></tr></table></figure></p>
-<p>修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msgAlt.attach(MIMEText(body.format(url),&apos;html&apos;,&apos;utf-8&apos;))</span><br></pre></td></tr></table></figure></p>
+<p>并将<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msgAlt.attach(MIMEText(body.format(url),<span class="string">'html'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>修改为<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msgAlt.attach(MIMEText(body.format(url),<span class="string">'html'</span>,<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure></p>
 <h3 id="index-php内容修改"><a href="#index-php内容修改" class="headerlink" title="index.php内容修改"></a>index.php内容修改</h3><h4 id="修改域名"><a href="#修改域名" class="headerlink" title="修改域名"></a>修改域名</h4><p>修改位置在index.php中有提示：<br><img src="/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/change_domain.PNG" alt=""><br>将其中的dionach.com修改为收件人邮箱的域名。</p>
 <h4 id="修改重定向"><a href="#修改重定向" class="headerlink" title="修改重定向"></a>修改重定向</h4><p>在index.php末尾存在重定向方法，可以将此url改为你想要重定向的url，如<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br><img src="/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/重定向.PNG" alt=""></p>
 <h4 id="修改记录log文件保存位置"><a href="#修改记录log文件保存位置" class="headerlink" title="修改记录log文件保存位置"></a>修改记录log文件保存位置</h4><p>index.php中将log文件保存在/tmp目录中，若使用windows搭建网站服务，则不存在/tmp目录,直接将log文件保存在当前目录，删除下面代码中的”/tmp/“<br><img src="/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/log文件位置.PNG" alt=""></p>
