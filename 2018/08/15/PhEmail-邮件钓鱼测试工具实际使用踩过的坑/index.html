@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://zeringzxh.github.io/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/重定向.PNG">
 <meta property="og:image" content="http://zeringzxh.github.io/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/log文件位置.PNG">
 <meta property="og:image" content="http://zeringzxh.github.io/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/log信息.PNG">
-<meta property="og:updated_time" content="2018-08-15T03:52:52.402Z">
+<meta property="og:updated_time" content="2018-08-16T03:12:58.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PhEmail:邮件钓鱼测试工具实际使用踩过的坑">
 <meta name="twitter:description" content="PhEmail简介PhEmail是基于python编写的一款网络钓鱼邮件测试工具。PhEmail可以同时向多个用户发送钓鱼邮件，并记录点击的用户的邮箱和IP等信息。PhEmail可以通过Google收集邮箱，完成邮箱收集工作。该工具可以用于公司内部邮箱钓鱼测试，可结合beef使用。 PhEmail项目主页：PhEmail钓鱼邮件工具">
@@ -346,12 +346,24 @@
                 
               
 
-              <time title="创建时间：2018-08-15 09:40:30 / 修改时间：11:52:52" itemprop="dateCreated datePublished" datetime="2018-08-15T09:40:30+08:00">2018-08-15</time>
+              <time title="创建时间：2018-08-15 09:40:30" itemprop="dateCreated datePublished" datetime="2018-08-15T09:40:30+08:00">2018-08-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-16 11:12:58" itemprop="dateModified" datetime="2018-08-16T11:12:58+08:00">2018-08-16</time>
               
             
           </span>
@@ -444,7 +456,7 @@
 <h3 id="index-php内容修改"><a href="#index-php内容修改" class="headerlink" title="index.php内容修改"></a>index.php内容修改</h3><h4 id="修改域名"><a href="#修改域名" class="headerlink" title="修改域名"></a>修改域名</h4><p>修改位置在index.php中有提示：<br><img src="/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/change_domain.PNG" alt=""><br>将其中的dionach.com修改为收件人邮箱的域名。</p>
 <h4 id="修改重定向"><a href="#修改重定向" class="headerlink" title="修改重定向"></a>修改重定向</h4><p>在index.php末尾存在重定向方法，可以将此url改为你想要重定向的url，如<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br><img src="/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/重定向.PNG" alt=""></p>
 <h4 id="修改记录log文件保存位置"><a href="#修改记录log文件保存位置" class="headerlink" title="修改记录log文件保存位置"></a>修改记录log文件保存位置</h4><p>index.php中将log文件保存在/tmp目录中，若使用windows搭建网站服务，则不存在/tmp目录,直接将log文件保存在当前目录，删除下面代码中的”/tmp/“<br><img src="/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/log文件位置.PNG" alt=""></p>
-<h2 id="整理log日志"><a href="#整理log日志" class="headerlink" title="整理log日志"></a>整理log日志</h2><p>若收件人点击后php获取了如下一系列信息：<br><img src="/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/log信息.PNG" alt=""><br>若存在多个文件，并想提取其中的email地址，并去重，于是写了一个小脚本进行提取email去重：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- conding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">regex = <span class="string">r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"</span></span><br><span class="line"></span><br><span class="line">filename = sys.argv[<span class="number">1</span>]</span><br><span class="line">allinemail = []</span><br><span class="line"><span class="keyword">with</span> open(filename,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    emails = re.findall(regex,f.read())</span><br><span class="line">    allemail = list(set(emails))</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'email_result.txt'</span>,<span class="string">'a'</span>) <span class="keyword">as</span> w:</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'email_result.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> cf:</span><br><span class="line">            <span class="keyword">for</span> e <span class="keyword">in</span> cf.readlines():</span><br><span class="line">                allinemail.append(e)</span><br><span class="line">        cf.close()</span><br><span class="line">        <span class="keyword">for</span> email <span class="keyword">in</span> allemail:</span><br><span class="line">            <span class="keyword">if</span> email <span class="keyword">not</span> <span class="keyword">in</span> allinemail:</span><br><span class="line">                w.write(<span class="string">'\n'</span>+email)</span><br><span class="line">    w.close()</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure></p>
+<h2 id="整理log日志"><a href="#整理log日志" class="headerlink" title="整理log日志"></a>整理log日志</h2><p>若收件人点击后php获取了如下一系列信息：<br><img src="/2018/08/15/PhEmail-邮件钓鱼测试工具实际使用踩过的坑/log信息.PNG" alt=""><br>若存在多个文件，并想提取其中的email地址，并去重，于是写了一个小脚本进行提取email去重：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- conding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">regex = <span class="string">r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"</span></span><br><span class="line"></span><br><span class="line">filepth = sys.argv[<span class="number">1</span>]</span><br><span class="line">file = os.listdir(filepth)</span><br><span class="line">allinemail = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> file:</span><br><span class="line">    <span class="keyword">with</span> open(filepth+filename,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        emails = re.findall(regex,f.read())</span><br><span class="line">        allemail = list(set(emails))</span><br><span class="line">        <span class="keyword">for</span> e <span class="keyword">in</span> allemail:</span><br><span class="line">            <span class="keyword">if</span> e <span class="keyword">not</span> <span class="keyword">in</span> allinemail:</span><br><span class="line">                allinemail.append(e)</span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'email_result.txt'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> w:</span><br><span class="line">    <span class="keyword">for</span> email <span class="keyword">in</span> allinemail:</span><br><span class="line">        w.write(<span class="string">'\n'</span>+email)</span><br><span class="line">w.close()</span><br></pre></td></tr></table></figure></p>
 <p>每次处理一个文件。</p>
 
       
