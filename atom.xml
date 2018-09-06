@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zeringzxh.github.io/"/>
-  <updated>2018-08-16T03:43:02.709Z</updated>
+  <updated>2018-09-06T02:41:03.976Z</updated>
   <id>http://zeringzxh.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>汇编指令</title>
+    <link href="http://zeringzxh.github.io/2018/09/05/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/"/>
+    <id>http://zeringzxh.github.io/2018/09/05/汇编指令/</id>
+    <published>2018-09-05T06:42:45.000Z</published>
+    <updated>2018-09-06T02:41:03.976Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="数据定义"><a href="#数据定义" class="headerlink" title="数据定义"></a>数据定义</h2><p>db定义字节类型变量，一个字节数据占1个字节（8位）单元，读完一个，偏移量加1<br>dw定义字类型变量，一个字数据占2个字节（16位）单元，读完一个，偏移量加2<br>dd定义双字类型变量，一个双字数据占4个字节（32位）单元，读完一个，偏移量加4<br>dup操作符用来进行数据的重复：<br>db 重复的次数 dup (重复的字节型数据)。<br>dw 重复的次数 dup (重复的字型数据)。<br>dd 重复的次数 dup (重复的双字数据)。<br><a id="more"></a></p><h2 id="寄存器相关"><a href="#寄存器相关" class="headerlink" title="寄存器相关"></a>寄存器相关</h2><h3 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h3><p>8086CPU的AX、BX、CX、DX四个16位寄存器都可分为两个独立使用的8位寄存器来用：</p><ul><li>AX可分为AH和AL</li><li>BX可分为BH和BL</li><li>CX可分为CH和CL</li><li>DX可分为DH和DL</li></ul><table><thead><tr><th>汇编指令</th><th>功能</th><th>高级语言描述</th></tr></thead><tbody><tr><td>mov ax,18</td><td>将18送入寄存器ax</td><td>ax=18</td></tr><tr><td>add ax,8</td><td>将寄存器ax中的值加8</td><td>ax=ax+8</td></tr><tr><td>sub ax,8</td><td>将寄存器ax中的值减8</td><td>ax=ax-8</td></tr><tr><td>inc ax</td><td>将寄存器ax中的值加1</td><td>ax=ax+1</td></tr></tbody></table><h3 id="段寄存器-amp-指令指针寄存器"><a href="#段寄存器-amp-指令指针寄存器" class="headerlink" title="段寄存器&amp;指令指针寄存器"></a>段寄存器&amp;指令指针寄存器</h3><p>8086CPU有4个段寄存器：CS、DS、SS、ES。访问内存时由4个段寄存器提供内存单元的段地址。<br>IP为指令指针寄存器，任意时刻，CPU将CS:IP指向的内容当作指令执行。<br>CS值*16+IP值</p><p>jmp指令同时修改CS、IP的内容：<br>jmp 2AE3:3,执行后：CS=2AE3H，IP=0003H，CPU从2AE33H处读取指令<br>jmp指令仅仅修改IP的内容：<br>jmp ax,执行前：ax=1000H，CS=2AE3H，IP=0003H<br>       执行后：ax=1000H，CS=2AE3H，IP=1000H</p><h3 id="DS-amp-address"><a href="#DS-amp-address" class="headerlink" title="DS&amp;[address]"></a>DS&amp;[address]</h3><p>DS存放要访问数据的段地址，[address]中address表示偏移地址。<br>| 汇编指令     | 执行后相关寄存器中内容 | 说明                                |<br>| ———— | ———————- | ———————————– |<br>| mov ax,1000H | ax=1000H               |                                     |<br>| mov ds,ax    | ds=1000H               | 寄存器ds设为1000H                   |<br>| mov ax,[0]   |                        | 将1000H:0中存放的字型数据存放到ax中 |</p><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>SS段寄存器存放栈顶地址，SP寄存器存放偏移地址。任意时刻，SS:SP都指向栈顶元素。<br>push ax时，SP-2，SS:SP指向栈顶。pop ax时，SP+2，SS:SP指向栈顶。</p><h2 id="and和or指令"><a href="#and和or指令" class="headerlink" title="and和or指令"></a>and和or指令</h2><p>and指令：逻辑与指令，按位进行与运算。<br>or指令：逻辑或指令，按位进行或运算。</p><h2 id="div指令"><a href="#div指令" class="headerlink" title="div指令"></a>div指令</h2><p>除法指令：</p><ol><li>除数：有8位和16位两种，在一个寄存器或内存单元中</li><li>被除数：默认放在AX或DX和AX中，若除数为8位，则被除数16位，存放AX中；若除数为16位，被除数为32位，存放DX和AX中，DX存放高位，AX存放低位。</li><li>结果：若除数为8位，则AL存放除法操作的商，AH存放除法操作的余数。若为16位，则AX存放商，DX存放余数。</li></ol><p>例子：<br>div byte ptr ds:[0]<br>含义：(al)=(ax)/((ds)<em>16+0)的商<br>      (ah)=(ax)/((ds)</em>16+0)的余数</p><p>div word ptr es:[0]<br>含义：(ax)=[(dx)<em>10000H+(ax)]/((es)</em>16+0)的商<br>     (dx)=[(dx)<em>10000H+(ax)]/((es)</em>16+0)的余数</p><h2 id="mul指令"><a href="#mul指令" class="headerlink" title="mul指令"></a>mul指令</h2><p>乘法指令：</p><ol><li>两个相乘的数，要么都是8位，要么都是16位。若为8位，一个默认放在AH中，另一个放在8位寄存器或内存字节单元中；若为16位，一个默认放在AX中，另一个放在16位寄存器或内存字节单元中。</li><li>结果：若是8位乘法，结果默认放在AX中；若是16位，结果高位默认放在DX中，低位在AX中。</li></ol><h2 id="转移指令"><a href="#转移指令" class="headerlink" title="转移指令"></a>转移指令</h2><h3 id="操作符offset"><a href="#操作符offset" class="headerlink" title="操作符offset"></a>操作符offset</h3><p>offset：取得标号的偏移地址<br>mov ax,offset start相当与mov ax,0;start为代码段中的标号，所标记的指令为代码中的第一条指令，偏移地址为0。</p><h3 id="jmp指令"><a href="#jmp指令" class="headerlink" title="jmp指令"></a>jmp指令</h3><p>jmp为无条件转移指令。可以只修改IP，也可同时修改CS和IP。<br>jmp short 标号（转到标号处执行指令）<br>“jmp short 标号”功能：(IP)=(IP)+8位位移。<br>“jmp near ptr 标号”功能：(IP)=(IP)+16。<br>“jmp far ptr 标号”实现段间转移，又称远转移。功能：(CS)=标号所在段的段地址；(IP)=标号在段中的偏移地址。</p><h3 id="Jxx"><a href="#Jxx" class="headerlink" title="Jxx"></a>Jxx</h3><p>功能: 当特定条件成立则跳往指定地址执行<br>语法: JXX 地址<br>注:<br>A: ABOVE,当C=0,Z=0时成立<br>B: BELOW,当C=1时成立<br>C: CARRY,当弁时成立 CXZ: CX寄存器的值为0(ZERO)时成立<br>E: EQUAL,当Z=1时成立<br>G: GREATER(大于),当Z=0且S=0时成立<br>L: LESS(小于),当S不为零时成立<br>N: NOT(相反条件),需和其它符号配合使用<br>O: OVERFLOW,O=1时成立<br>P: PARITY,P=1时成立<br>PE: PARITY EVEN,P=1时成立<br>PO: PARITY ODD,P=0时成立<br>S: SIGN,S=1时成立<br>Z: ZERO,Z=1时成立<br>jcxz：有条件转移指令且为短转移，指令格式：jcxz 标号（如果(cx)=0，转移到标号处执行）。当(cx)!=0时，什么都不做（程序向下执行）。<br>“jcxz 标号”功能相当于if((cx)==0)jmp short 标号；</p><h3 id="loop指令"><a href="#loop指令" class="headerlink" title="loop指令"></a>loop指令</h3><p>loop为循环控制指令，loop指令格式：loop 标号；CPU执行loop指令时，进行两步操作：</p><ol><li>cx值=cx值-1；</li><li>判断cx中的值，不为0则跳转至标号处执行程序，如果为0则向下执行。</li></ol><h3 id="ret和retf"><a href="#ret和retf" class="headerlink" title="ret和retf"></a>ret和retf</h3><p>ret指令用栈中数据修改IP的内容，从而实现近转移，相当与pop IP。<br>retf指令用栈中数据修改CS和IP的内容，从而实现远转移，相当于pop IP后在pop CS。</p><h3 id="call指令"><a href="#call指令" class="headerlink" title="call指令"></a>call指令</h3><p>call指令进行两步操作：</p><ol><li>将当前的IP或CS和IP压入栈中；</li><li>转移。<br>call指令不能实现短转移。执行call相当于执行：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push IP</span><br><span class="line">jmp near ptr 标号</span><br></pre></td></tr></table></figure></li></ol><p>转移的目的地址在指令中的call指令，”call far ptr 标号”实现段间转移，相当于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">push CS</span><br><span class="line">push IP</span><br><span class="line">jmp far ptr 标号</span><br></pre></td></tr></table></figure></p><h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p><a href="https://blog.csdn.net/qq_33733970/article/details/78572733" target="_blank" rel="noopener">常用的汇编指令</a></p><h2 id="指令大全"><a href="#指令大全" class="headerlink" title="指令大全"></a>指令大全</h2><p><img src="/2018/09/05/汇编指令/汇编指令大全.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;数据定义&quot;&gt;&lt;a href=&quot;#数据定义&quot; class=&quot;headerlink&quot; title=&quot;数据定义&quot;&gt;&lt;/a&gt;数据定义&lt;/h2&gt;&lt;p&gt;db定义字节类型变量，一个字节数据占1个字节（8位）单元，读完一个，偏移量加1&lt;br&gt;dw定义字类型变量，一个字数据占2个字节（16位）单元，读完一个，偏移量加2&lt;br&gt;dd定义双字类型变量，一个双字数据占4个字节（32位）单元，读完一个，偏移量加4&lt;br&gt;dup操作符用来进行数据的重复：&lt;br&gt;db 重复的次数 dup (重复的字节型数据)。&lt;br&gt;dw 重复的次数 dup (重复的字型数据)。&lt;br&gt;dd 重复的次数 dup (重复的双字数据)。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="汇编" scheme="http://zeringzxh.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+      <category term="汇编指令" scheme="http://zeringzxh.github.io/tags/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/"/>
+    
+  </entry>
   
   <entry>
     <title>PhEmail:邮件钓鱼测试工具实际使用踩过的坑</title>
