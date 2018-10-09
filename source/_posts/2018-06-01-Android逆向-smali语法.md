@@ -3,7 +3,6 @@ title: Android逆向-smali语法
 date: 2018-06-01 10:56:06
 tags:
   - 逆向
-  - smali
   - android
 categories: 逆向
 ---

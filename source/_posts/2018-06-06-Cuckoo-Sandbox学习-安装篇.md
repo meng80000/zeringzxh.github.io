@@ -3,8 +3,7 @@ title: Cuckoo-Sandbox学习-安装篇
 date: 2018-06-06 14:11:45
 tags:
   - Cickoo Sandbox
-  - 工具安装
-categories: Cuckoo Sandbox
+categories: 工具使用
 ---
 
 Cuckoo Sandbox是一个开源的恶意文件自动化分析系统，通过Cuckoo Sandbox可以方便地帮助安全研究人员验证恶意程序的特征信息。

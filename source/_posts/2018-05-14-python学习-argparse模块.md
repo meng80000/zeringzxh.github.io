@@ -2,7 +2,6 @@
 title: python学习-argparse模块
 date: 2018-05-14 15:28:37
 tags:
-  - python
   - argparse
 categories: python
 ---
