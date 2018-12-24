@@ -102,19 +102,19 @@
 
 
 
-  <meta name="description" content="0x00 pwn介绍  PWN是指二进制漏洞的发掘和利用，CTF中PWN题目一般出现在linux平台上 0x01 pwn所需的基础知识 c语言 汇编语言 Python 操作系统基础 linux基本命令  寄存器IP/EIP/RIP：指向当前的命令地址SP/ESP/RSP：指向栈的顶部BP/EBP/RBP：指向栈的底部 栈一种后进先出的数据结构，用于调用函数过程中回复寄存器的状态。 大端与小端模式以">
+  <meta name="description" content="0x00 pwn介绍  PWN是指二进制漏洞的发掘和利用，CTF中PWN题目一般出现在linux平台上">
 <meta name="keywords" content="pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PWN学习笔记--入门">
 <meta property="og:url" content="http://zeringzxh.github.io/2018/12/12/PWN学习笔记-入门/index.html">
 <meta property="og:site_name" content="zering的博客">
-<meta property="og:description" content="0x00 pwn介绍  PWN是指二进制漏洞的发掘和利用，CTF中PWN题目一般出现在linux平台上 0x01 pwn所需的基础知识 c语言 汇编语言 Python 操作系统基础 linux基本命令  寄存器IP/EIP/RIP：指向当前的命令地址SP/ESP/RSP：指向栈的顶部BP/EBP/RBP：指向栈的底部 栈一种后进先出的数据结构，用于调用函数过程中回复寄存器的状态。 大端与小端模式以">
+<meta property="og:description" content="0x00 pwn介绍  PWN是指二进制漏洞的发掘和利用，CTF中PWN题目一般出现在linux平台上">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://zeringzxh.github.io/2018/12/12/PWN学习笔记-入门/栈.PNG">
-<meta property="og:updated_time" content="2018-12-12T09:20:02.303Z">
+<meta property="og:updated_time" content="2018-12-24T09:02:24.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PWN学习笔记--入门">
-<meta name="twitter:description" content="0x00 pwn介绍  PWN是指二进制漏洞的发掘和利用，CTF中PWN题目一般出现在linux平台上 0x01 pwn所需的基础知识 c语言 汇编语言 Python 操作系统基础 linux基本命令  寄存器IP/EIP/RIP：指向当前的命令地址SP/ESP/RSP：指向栈的顶部BP/EBP/RBP：指向栈的底部 栈一种后进先出的数据结构，用于调用函数过程中回复寄存器的状态。 大端与小端模式以">
+<meta name="twitter:description" content="0x00 pwn介绍  PWN是指二进制漏洞的发掘和利用，CTF中PWN题目一般出现在linux平台上">
 <meta name="twitter:image" content="http://zeringzxh.github.io/2018/12/12/PWN学习笔记-入门/栈.PNG">
 
 
@@ -342,12 +342,24 @@
                 
               
 
-              <time title="创建时间：2018-12-12 14:53:20 / 修改时间：17:20:02" itemprop="dateCreated datePublished" datetime="2018-12-12T14:53:20+08:00">2018-12-12</time>
+              <time title="创建时间：2018-12-12 14:53:20" itemprop="dateCreated datePublished" datetime="2018-12-12T14:53:20+08:00">2018-12-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-24 17:02:24" itemprop="dateModified" datetime="2018-12-24T17:02:24+08:00">2018-12-24</time>
               
             
           </span>
@@ -408,7 +420,7 @@
       
 
       
-        <h1 id="0x00-pwn介绍"><a href="#0x00-pwn介绍" class="headerlink" title="0x00 pwn介绍"></a>0x00 pwn介绍</h1><p>  PWN是指二进制漏洞的发掘和利用，CTF中PWN题目一般出现在linux平台上</p>
+        <h1 id="0x00-pwn介绍"><a href="#0x00-pwn介绍" class="headerlink" title="0x00 pwn介绍"></a>0x00 pwn介绍</h1><p>  PWN是指二进制漏洞的发掘和利用，CTF中PWN题目一般出现在linux平台上<br><a id="more"></a></p>
 <h1 id="0x01-pwn所需的基础知识"><a href="#0x01-pwn所需的基础知识" class="headerlink" title="0x01 pwn所需的基础知识"></a>0x01 pwn所需的基础知识</h1><ul>
 <li>c语言</li>
 <li>汇编语言</li>
