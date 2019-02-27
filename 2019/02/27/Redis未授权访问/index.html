@@ -102,13 +102,13 @@
 
 
 
-  <meta name="description" content="0x01 漏洞简介Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root账号写入SSH公钥文件，直接通过SSH免密登录服务器。Redis默认端口为6379端口。若此端口未限制公网访问，会导致Redis服务暴露公网，造成未授权访问。 0x02 攻击手段连接测试已知网络靶场IP为219.153.49.228，Redis端 口为47234，提供了http端口为41481。使">
+  <meta name="description" content="0x01 漏洞简介Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root账号写入SSH公钥文件，直接通过SSH免密登录服务器。Redis默认端口为6379端口。若此端口未限制公网访问，会导致Redis服务暴露公网，造成未授权访问。">
 <meta name="keywords" content="漏洞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis未授权访问">
 <meta property="og:url" content="https://fl4g.cn/2019/02/27/Redis未授权访问/index.html">
 <meta property="og:site_name" content="zering的博客">
-<meta property="og:description" content="0x01 漏洞简介Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root账号写入SSH公钥文件，直接通过SSH免密登录服务器。Redis默认端口为6379端口。若此端口未限制公网访问，会导致Redis服务暴露公网，造成未授权访问。 0x02 攻击手段连接测试已知网络靶场IP为219.153.49.228，Redis端 口为47234，提供了http端口为41481。使">
+<meta property="og:description" content="0x01 漏洞简介Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root账号写入SSH公钥文件，直接通过SSH免密登录服务器。Redis默认端口为6379端口。若此端口未限制公网访问，会导致Redis服务暴露公网，造成未授权访问。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://fl4g.cn/2019/02/27/Redis未授权访问/连接测试.PNG">
 <meta property="og:image" content="https://fl4g.cn/2019/02/27/Redis未授权访问/生成公私钥.PNG">
@@ -118,10 +118,10 @@
 <meta property="og:image" content="https://fl4g.cn/2019/02/27/Redis未授权访问/查看权限.png">
 <meta property="og:image" content="https://fl4g.cn/2019/02/27/Redis未授权访问/写入webshell.png">
 <meta property="og:image" content="https://fl4g.cn/2019/02/27/Redis未授权访问/连接webshell.png">
-<meta property="og:updated_time" content="2019-02-27T07:51:07.927Z">
+<meta property="og:updated_time" content="2019-02-27T07:53:46.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis未授权访问">
-<meta name="twitter:description" content="0x01 漏洞简介Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root账号写入SSH公钥文件，直接通过SSH免密登录服务器。Redis默认端口为6379端口。若此端口未限制公网访问，会导致Redis服务暴露公网，造成未授权访问。 0x02 攻击手段连接测试已知网络靶场IP为219.153.49.228，Redis端 口为47234，提供了http端口为41481。使">
+<meta name="twitter:description" content="0x01 漏洞简介Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root账号写入SSH公钥文件，直接通过SSH免密登录服务器。Redis默认端口为6379端口。若此端口未限制公网访问，会导致Redis服务暴露公网，造成未授权访问。">
 <meta name="twitter:image" content="https://fl4g.cn/2019/02/27/Redis未授权访问/连接测试.PNG">
 
 
@@ -349,7 +349,7 @@
                 
               
 
-              <time title="创建时间：2019-02-27 14:24:10 / 修改时间：15:51:07" itemprop="dateCreated datePublished" datetime="2019-02-27T14:24:10+08:00">2019-02-27</time>
+              <time title="创建时间：2019-02-27 14:24:10 / 修改时间：15:53:46" itemprop="dateCreated datePublished" datetime="2019-02-27T14:24:10+08:00">2019-02-27</time>
             
 
             
@@ -415,7 +415,7 @@
       
 
       
-        <h1 id="0x01-漏洞简介"><a href="#0x01-漏洞简介" class="headerlink" title="0x01 漏洞简介"></a>0x01 漏洞简介</h1><p>Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root账号写入SSH公钥文件，直接通过SSH免密登录服务器。Redis默认端口为6379端口。若此端口未限制公网访问，会导致Redis服务暴露公网，造成未授权访问。</p>
+        <h1 id="0x01-漏洞简介"><a href="#0x01-漏洞简介" class="headerlink" title="0x01 漏洞简介"></a>0x01 漏洞简介</h1><p>Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root账号写入SSH公钥文件，直接通过SSH免密登录服务器。Redis默认端口为6379端口。若此端口未限制公网访问，会导致Redis服务暴露公网，造成未授权访问。<br><a id="more"></a></p>
 <h1 id="0x02-攻击手段"><a href="#0x02-攻击手段" class="headerlink" title="0x02 攻击手段"></a>0x02 攻击手段</h1><h2 id="连接测试"><a href="#连接测试" class="headerlink" title="连接测试"></a>连接测试</h2><p>已知网络靶场IP为219.153.49.228，Redis端 口为47234，提供了http端口为41481。使用redis客户端进行连接尝试：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./redis-cli -h 219.153.49.228 -p 47234</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2019/02/27/Redis未授权访问/连接测试.PNG" alt=""></p>
 <h2 id="本地生成公私钥"><a href="#本地生成公私钥" class="headerlink" title="本地生成公私钥"></a>本地生成公私钥</h2><p>若Redis以root用户运行，可以直接将本地生成的公钥导入到/root/.ssh/authorized.keys文件中实现免密登录。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure></p>
