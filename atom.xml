@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://fl4g.cn/"/>
-  <updated>2019-02-27T07:53:46.736Z</updated>
+  <updated>2019-03-07T04:31:20.995Z</updated>
   <id>https://fl4g.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NSA逆向工具--Ghidra安装及漏洞修复</title>
+    <link href="https://fl4g.cn/2019/03/07/NSA%E9%80%86%E5%90%91%E5%B7%A5%E5%85%B7-Ghidra%E5%AE%89%E8%A3%85%E5%8F%8A%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/"/>
+    <id>https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/</id>
+    <published>2019-03-07T02:35:51.000Z</published>
+    <updated>2019-03-07T04:31:20.995Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="0x01-简介"><a href="#0x01-简介" class="headerlink" title="0x01 简介"></a>0x01 简介</h1><p>2019年RSA安全大会上，美国国家安全局（NSA）公布了一款名叫Ghidra的逆向工程工具。Ghidra使用Java编写，具有图形界面，可在Windows，Mac和Linux上运行。</p><p><strong>Ghidra官网地址：</strong><a href="https://ghidra-sre.org/" target="_blank" rel="noopener">https://ghidra-sre.org/</a><br>注：屏蔽了部分国家IP地址，方法大家都懂。。。<br><a id="more"></a></p><h1 id="0x02-安装环境"><a href="#0x02-安装环境" class="headerlink" title="0x02 安装环境"></a>0x02 安装环境</h1><h2 id="平台支持"><a href="#平台支持" class="headerlink" title="平台支持"></a>平台支持</h2><ul><li>Microsoft Windows 7 or 10 (64位)</li><li>Linux （64位，推荐使用CentOS 7）</li><li>macOS (OS X) 10.8.3+（Mountain Lion或更高版本）<br><strong>注意：</strong> 不推荐使用32位操作系统<br>（本人使用64位的CentOS 7）</li></ul><h2 id="最低要求"><a href="#最低要求" class="headerlink" title="最低要求"></a>最低要求</h2><h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><ul><li>4 GB RAM</li><li>1 GB storage</li></ul><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul><li>JDK 11 或更高版本<br>（推荐使用OpenJDK，地址：<a href="http://jdk.java.net/" target="_blank" rel="noopener">jdk.java.net</a>，本人使用JDK 11.0.2版本。）</li></ul><h1 id="0x03-安装步骤"><a href="#0x03-安装步骤" class="headerlink" title="0x03 安装步骤"></a>0x03 安装步骤</h1><p>解压jdk到本地<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf openjdk-11.0.2_linux-x64_bin.tar.gz</span><br></pre></td></tr></table></figure></p><p><img src="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/OpenJDK.png" alt=""></p><p>将JDK bin目录添加到PATH环境变量。当然我们可以指定Ghidra使用指定的Java启动（在support / launch.properties文件中设置JAVA_HOME_OVERRIDE属性），当Java版本不兼容时，Ghidra会自动查找兼容版本。</p><p>解压Ghidra到本地，进入文件夹，运行ghidraRun，即可打开Ghidra</p><p><img src="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/Ghidra.png" alt=""></p><h1 id="0x04-bugdoor修复"><a href="#0x04-bugdoor修复" class="headerlink" title="0x04 bugdoor修复"></a>0x04 bugdoor修复</h1><h2 id="漏洞说明"><a href="#漏洞说明" class="headerlink" title="漏洞说明"></a>漏洞说明</h2><p>工具发布后，Matthew Hickey报告了一个安全问题，在调试模式下运行套件时，会向网络打开18001端口，接受任何可以连接的机器的远程命令。</p><p><img src="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/漏洞.PNG" alt=""></p><h2 id="修复方法"><a href="#修复方法" class="headerlink" title="修复方法"></a>修复方法</h2><p>打开support目录下的launch.sh文件，找到150行代码，将*修改为127.0.0.1，仅监听本机的调试连接，而不是通过网络监听任何主机。</p><p><img src="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/修复.png" alt=""></p><h1 id="0x05-参考"><a href="#0x05-参考" class="headerlink" title="0x05 参考"></a>0x05 参考</h1><p><a href="https://ghidra-sre.org/InstallationGuide.html" target="_blank" rel="noopener">Ghidra Installation Guide</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;0x01-简介&quot;&gt;&lt;a href=&quot;#0x01-简介&quot; class=&quot;headerlink&quot; title=&quot;0x01 简介&quot;&gt;&lt;/a&gt;0x01 简介&lt;/h1&gt;&lt;p&gt;2019年RSA安全大会上，美国国家安全局（NSA）公布了一款名叫Ghidra的逆向工程工具。Ghidra使用Java编写，具有图形界面，可在Windows，Mac和Linux上运行。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ghidra官网地址：&lt;/strong&gt;&lt;a href=&quot;https://ghidra-sre.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://ghidra-sre.org/&lt;/a&gt;&lt;br&gt;注：屏蔽了部分国家IP地址，方法大家都懂。。。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具使用" scheme="https://fl4g.cn/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+    
+    
+      <category term="逆向" scheme="https://fl4g.cn/tags/%E9%80%86%E5%90%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis未授权访问</title>

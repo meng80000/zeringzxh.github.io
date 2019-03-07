@@ -102,17 +102,23 @@
 
 
 
-  <meta name="description" content="学而时习之">
-<meta name="keywords" content="zering,python,网络">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zering的博客">
-<meta property="og:url" content="https://fl4g.cn/tags/web/index.html">
+  <meta name="description" content="0x01 简介2019年RSA安全大会上，美国国家安全局（NSA）公布了一款名叫Ghidra的逆向工程工具。Ghidra使用Java编写，具有图形界面，可在Windows，Mac和Linux上运行。 Ghidra官网地址：https://ghidra-sre.org/注：屏蔽了部分国家IP地址，方法大家都懂。。。">
+<meta name="keywords" content="逆向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSA逆向工具--Ghidra安装及漏洞修复">
+<meta property="og:url" content="https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/index.html">
 <meta property="og:site_name" content="zering的博客">
-<meta property="og:description" content="学而时习之">
+<meta property="og:description" content="0x01 简介2019年RSA安全大会上，美国国家安全局（NSA）公布了一款名叫Ghidra的逆向工程工具。Ghidra使用Java编写，具有图形界面，可在Windows，Mac和Linux上运行。 Ghidra官网地址：https://ghidra-sre.org/注：屏蔽了部分国家IP地址，方法大家都懂。。。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/OpenJDK.png">
+<meta property="og:image" content="https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/Ghidra.png">
+<meta property="og:image" content="https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/漏洞.PNG">
+<meta property="og:image" content="https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/修复.png">
+<meta property="og:updated_time" content="2019-03-07T04:31:20.995Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zering的博客">
-<meta name="twitter:description" content="学而时习之">
+<meta name="twitter:title" content="NSA逆向工具--Ghidra安装及漏洞修复">
+<meta name="twitter:description" content="0x01 简介2019年RSA安全大会上，美国国家安全局（NSA）公布了一款名叫Ghidra的逆向工程工具。Ghidra使用Java编写，具有图形界面，可在Windows，Mac和Linux上运行。 Ghidra官网地址：https://ghidra-sre.org/注：屏蔽了部分国家IP地址，方法大家都懂。。。">
+<meta name="twitter:image" content="https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/OpenJDK.png">
 
 
 
@@ -121,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="https://fl4g.cn/tags/web/">
+  <link rel="canonical" href="https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/">
 
 
 
@@ -131,7 +137,7 @@
   };
 </script>
 
-  <title>标签: web | zering的博客</title>
+  <title>NSA逆向工具--Ghidra安装及漏洞修复 | zering的博客</title>
   
 
 
@@ -178,7 +184,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/zeringzxh" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style></a>
@@ -228,7 +234,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
   </li>
@@ -257,25 +263,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -300,56 +287,252 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>web<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zering">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zering的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/10/11/CTF一道web题小结-无数字字母getFlag/" itemprop="url">
-              
-                <span itemprop="name">CTF一道web题小结-无数字字母getFlag()</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">NSA逆向工具--Ghidra安装及漏洞修复
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-10-11T10:42:01+08:00" content="2018-10-11">
-          10-11
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-07 10:35:51 / 修改时间：12:31:20" itemprop="dateCreated datePublished" datetime="2019-03-07T10:35:51+08:00">2019-03-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具使用/" itemprop="url" rel="index"><span itemprop="name">工具使用</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="0x01-简介"><a href="#0x01-简介" class="headerlink" title="0x01 简介"></a>0x01 简介</h1><p>2019年RSA安全大会上，美国国家安全局（NSA）公布了一款名叫Ghidra的逆向工程工具。Ghidra使用Java编写，具有图形界面，可在Windows，Mac和Linux上运行。</p>
+<p><strong>Ghidra官网地址：</strong><a href="https://ghidra-sre.org/" target="_blank" rel="noopener">https://ghidra-sre.org/</a><br>注：屏蔽了部分国家IP地址，方法大家都懂。。。<br><a id="more"></a></p>
+<h1 id="0x02-安装环境"><a href="#0x02-安装环境" class="headerlink" title="0x02 安装环境"></a>0x02 安装环境</h1><h2 id="平台支持"><a href="#平台支持" class="headerlink" title="平台支持"></a>平台支持</h2><ul>
+<li>Microsoft Windows 7 or 10 (64位)</li>
+<li>Linux （64位，推荐使用CentOS 7）</li>
+<li>macOS (OS X) 10.8.3+（Mountain Lion或更高版本）<br><strong>注意：</strong> 不推荐使用32位操作系统<br>（本人使用64位的CentOS 7）</li>
+</ul>
+<h2 id="最低要求"><a href="#最低要求" class="headerlink" title="最低要求"></a>最低要求</h2><h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><ul>
+<li>4 GB RAM</li>
+<li>1 GB storage</li>
+</ul>
+<h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul>
+<li>JDK 11 或更高版本<br>（推荐使用OpenJDK，地址：<a href="http://jdk.java.net/" target="_blank" rel="noopener">jdk.java.net</a>，本人使用JDK 11.0.2版本。）</li>
+</ul>
+<h1 id="0x03-安装步骤"><a href="#0x03-安装步骤" class="headerlink" title="0x03 安装步骤"></a>0x03 安装步骤</h1><p>解压jdk到本地<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf openjdk-11.0.2_linux-x64_bin.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/OpenJDK.png" alt=""></p>
+<p>将JDK bin目录添加到PATH环境变量。当然我们可以指定Ghidra使用指定的Java启动（在support / launch.properties文件中设置JAVA_HOME_OVERRIDE属性），当Java版本不兼容时，Ghidra会自动查找兼容版本。</p>
+<p>解压Ghidra到本地，进入文件夹，运行ghidraRun，即可打开Ghidra</p>
+<p><img src="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/Ghidra.png" alt=""></p>
+<h1 id="0x04-bugdoor修复"><a href="#0x04-bugdoor修复" class="headerlink" title="0x04 bugdoor修复"></a>0x04 bugdoor修复</h1><h2 id="漏洞说明"><a href="#漏洞说明" class="headerlink" title="漏洞说明"></a>漏洞说明</h2><p>工具发布后，Matthew Hickey报告了一个安全问题，在调试模式下运行套件时，会向网络打开18001端口，接受任何可以连接的机器的远程命令。</p>
+<p><img src="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/漏洞.PNG" alt=""></p>
+<h2 id="修复方法"><a href="#修复方法" class="headerlink" title="修复方法"></a>修复方法</h2><p>打开support目录下的launch.sh文件，找到150行代码，将*修改为127.0.0.1，仅监听本机的调试连接，而不是通过网络监听任何主机。</p>
+<p><img src="/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/修复.png" alt=""></p>
+<h1 id="0x05-参考"><a href="#0x05-参考" class="headerlink" title="0x05 参考"></a>0x05 参考</h1><p><a href="https://ghidra-sre.org/InstallationGuide.html" target="_blank" rel="noopener">Ghidra Installation Guide</a></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    <div>
+          
+            <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+
+</div>
+
+          
+    </div>
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>zering</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/" title="NSA逆向工具--Ghidra安装及漏洞修复">https://fl4g.cn/2019/03/07/NSA逆向工具-Ghidra安装及漏洞修复/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/逆向/" rel="tag"><i class="fa fa-tag"></i> 逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/27/Redis未授权访问/" rel="next" title="Redis未授权访问">
+                <i class="fa fa-chevron-left"></i> Redis未授权访问
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -370,8 +553,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -515,6 +707,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-简介"><span class="nav-number">1.</span> <span class="nav-text">0x01 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-安装环境"><span class="nav-number">2.</span> <span class="nav-text">0x02 安装环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#平台支持"><span class="nav-number">2.1.</span> <span class="nav-text">平台支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最低要求"><span class="nav-number">2.2.</span> <span class="nav-text">最低要求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件"><span class="nav-number">2.2.1.</span> <span class="nav-text">硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件"><span class="nav-number">2.2.2.</span> <span class="nav-text">软件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-安装步骤"><span class="nav-number">3.</span> <span class="nav-text">0x03 安装步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x04-bugdoor修复"><span class="nav-number">4.</span> <span class="nav-text">0x04 bugdoor修复</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞说明"><span class="nav-number">4.1.</span> <span class="nav-text">漏洞说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修复方法"><span class="nav-number">4.2.</span> <span class="nav-text">修复方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x05-参考"><span class="nav-number">5.</span> <span class="nav-text">0x05 参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -660,6 +868,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
