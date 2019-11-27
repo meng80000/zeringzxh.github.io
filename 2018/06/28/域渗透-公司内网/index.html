@@ -102,26 +102,18 @@
 
 
 
-  <meta name="description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：">
+  <meta name="description" content="删">
 <meta name="keywords" content="渗透测试,内网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="渗透测试-公司内网">
 <meta property="og:url" content="https://fl4g.cn/2018/06/28/域渗透-公司内网/index.html">
 <meta property="og:site_name" content="zering的博客">
-<meta property="og:description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：">
+<meta property="og:description" content="删">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://fl4g.cn/2018/06/28/域渗透-公司内网/漏洞.PNG">
-<meta property="og:image" content="https://fl4g.cn/2018/06/28/域渗透-公司内网/meterpreter.PNG">
-<meta property="og:image" content="https://fl4g.cn/2018/06/28/域渗透-公司内网/getuid.PNG">
-<meta property="og:image" content="https://fl4g.cn/2018/06/28/域渗透-公司内网/乱码.PNG">
-<meta property="og:image" content="https://fl4g.cn/2018/06/28/域渗透-公司内网/域控.PNG">
-<meta property="og:image" content="https://fl4g.cn/2018/06/28/域渗透-公司内网/net_group.PNG">
-<meta property="og:image" content="https://fl4g.cn/2018/06/28/域渗透-公司内网/Domain_Admins.PNG">
-<meta property="og:updated_time" content="2018-06-28T10:30:20.911Z">
+<meta property="og:updated_time" content="2019-11-27T03:02:38.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="渗透测试-公司内网">
-<meta name="twitter:description" content="0x01 问题发现前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：">
-<meta name="twitter:image" content="https://fl4g.cn/2018/06/28/域渗透-公司内网/漏洞.PNG">
+<meta name="twitter:description" content="删">
 
 
 
@@ -348,12 +340,24 @@
                 
               
 
-              <time title="创建时间：2018-06-28 08:43:04 / 修改时间：18:30:20" itemprop="dateCreated datePublished" datetime="2018-06-28T08:43:04+08:00">2018-06-28</time>
+              <time title="创建时间：2018-06-28 08:43:04" itemprop="dateCreated datePublished" datetime="2018-06-28T08:43:04+08:00">2018-06-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-27 11:02:38" itemprop="dateModified" datetime="2019-11-27T11:02:38+08:00">2019-11-27</time>
               
             
           </span>
@@ -414,33 +418,7 @@
       
 
       
-        <h2 id="0x01-问题发现"><a href="#0x01-问题发现" class="headerlink" title="0x01 问题发现"></a>0x01 问题发现</h2><p>前段时间在公司内网搭建了OSSIM，对公司10.10.66.1/24网段进行扫描，发现10.10.66.239存在严重漏洞，如下图：<br><img src="/2018/06/28/域渗透-公司内网/漏洞.PNG" alt=""><br><a id="more"></a></p>
-<h2 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02 漏洞利用"></a>0x02 漏洞利用</h2><p>直接打开kali中神器msf，里面已经有ms17-010的poc，利用后获取meterpreter，如下图：<br><img src="/2018/06/28/域渗透-公司内网/meterpreter.PNG" alt=""></p>
-<p>查看权限，直接为system权限。</p>
-<p><img src="/2018/06/28/域渗透-公司内网/getuid.PNG" alt=""></p>
-<p>其他查看信息的命令不一一列举。</p>
-<p>进入cmd，发现kali控制台显示乱码，使用chcp 65001命令解决：</p>
-<p><img src="/2018/06/28/域渗透-公司内网/乱码.PNG" alt=""></p>
-<p>查看systeminfo信息，发现是域控。。。。。</p>
-<p><img src="/2018/06/28/域渗透-公司内网/域控.PNG" alt=""></p>
-<h2 id="0x02-域信息收集"><a href="#0x02-域信息收集" class="headerlink" title="0x02 域信息收集"></a>0x02 域信息收集</h2><p>windows server机器，使用dsget和dsquery进行域信息收集。<br>使用命令查看全域信息，内容太多，就不截图了<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dsquery * -limit <span class="number">0</span> -attr *</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>CN, OU, DC 都是 LDAP 连接服务器的端字符串中的区别名称（DN, distinguished   name）</p>
-<pre><code>DC (Domain Component)
-CN (Common Name)
-OU (Organizational Unit)
-</code></pre><p>例如：CN=test,OU=developer,DC=domainname,DC=com</p>
-<p>在上面的代码中 cn=test 可能代表一个用户名，ou=developer 代表一个 active directory 中的组织单位。这句话的含义可能就是说明 test 这个对象处在domainname.com 域的 developer 组织单元中</p>
-<hr>
-<p>查看域控制器，这里已经是域控制器，就不查看了。域控制器命令<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dsquery server -limit <span class="number">0</span> | dsget server -dn -desc -dnsname -site -isgc</span><br></pre></td></tr></table></figure></p>
-<p>其dsquery和dsget命令不一一列举。</p>
-<p>使用net查看命令查看域信息。<br>net group /do</p>
-<p><img src="/2018/06/28/域渗透-公司内网/net_group.PNG" alt=""></p>
-<p>查看Domain Admins组成员，使用dsquery同样可以查询。<br>net group “Domain Admins” /do</p>
-<p><img src="/2018/06/28/域渗透-公司内网/Domain_Admins.PNG" alt=""></p>
-<p>在上面，我们使用net view查看信息时报错：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System error <span class="number">6118</span> has occurred.</span><br><span class="line"></span><br><span class="line">The list of servers <span class="keyword">for</span> this workgroup is <span class="keyword">not</span> currently available</span><br></pre></td></tr></table></figure></p>
-<p>需要从services.msc中打开Computer Browser，先将域管理员用户打开。</p>
-<h2 id="0x03-后记"><a href="#0x03-后记" class="headerlink" title="0x03 后记"></a>0x03 后记</h2><p>公司内网，就不使用mimikatz进行获取密码了。下班了，其他情况日后再说。<br>黄金票据，白银票据等内容可以查看此博客：<br><a href="https://1sparrow.com/2018/02/19/%E5%9F%9F%E6%B8%97%E9%80%8F%E7%9B%B8%E5%85%B3/" target="_blank" rel="noopener">域渗透相关</a></p>
+        <p>删</p>
 
       
     </div>
@@ -565,17 +543,8 @@ OU (Organizational Unit)
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -726,22 +695,6 @@ OU (Organizational Unit)
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-问题发现"><span class="nav-number">1.</span> <span class="nav-text">0x01 问题发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-漏洞利用"><span class="nav-number">2.</span> <span class="nav-text">0x02 漏洞利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-域信息收集"><span class="nav-number">3.</span> <span class="nav-text">0x02 域信息收集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-后记"><span class="nav-number">4.</span> <span class="nav-text">0x03 后记</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -790,7 +743,7 @@ OU (Organizational Unit)
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共12.8k字</span>
+  <span class="post-count">博客全站共10.3k字</span>
 </div>
 
         
